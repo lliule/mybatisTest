@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<!--开启驼峰匹配-->
+		<setting name="mapUnderscoreToCamelCase" value="true" />
+		<setting name="logPrefix" value="lly"/>
+		<!--<setting name="lazyLoadingEnabled" value="true"/>
+		<setting name="aggressiveLazyLoading" value="false"/>-->
+
+	</settings>
+
+	<typeAliases>
+		<!-- 为每一个pojo类起别名，缺点，需要一个个的起名 -->
+		<!-- 扫描包，别名默认为了类名首字母小写 -->
+		<package name="com.weichaishi.model"/>
+	</typeAliases>
+	<plugins>
+		<!-- 分页插件 -->
+		<plugin interceptor="com.github.pagehelper.PageHelper">
+			<!-- 数据库方言，指定具体要连接数据库 -->
+			<property name="dialect" value="oracle" />
+			<!-- 设置为true时，分页查询的时候，同时会查询总数 -->
+			<property name="rowBoundsWithCount" value="true" />
+		</plugin>
+	</plugins>
+
+</configuration>

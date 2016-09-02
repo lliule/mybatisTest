@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.weichaishi.dao.LabacProjectsMapper">
+
+
+   <!-- <insert id="insertOne" keyProperty="projectId" flushCache="true">
+      <selectKey keyProperty="projectId" order="BEFORE" resultType="labacPorjects">
+          select  WCS_P.LABAC_TASK_SEQ.nextval from dual;
+      </selectKey>
+
+    </insert>-->
+
+</mapper>
