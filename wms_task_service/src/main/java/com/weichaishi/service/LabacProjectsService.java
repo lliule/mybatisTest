@@ -25,11 +25,11 @@ public class LabacProjectsService extends BaseService<LabacProjects,Integer> {
         Map<String,Object> map = new HashMap<String, Object>();
         entity.setProjectCreateTime(new Date());
         entity.setProjectUpdateTime(entity.getProjectCreateTime());
-        Integer projectId = labacProjectsMapper.selectProjectId();
-        entity.setProjectId(projectId);
-        Integer count = super.insert(entity);
-        map.put("projectId",projectId);
-        map.put("count",count);
+        Integer count = labacProjectsMapper.insertOne(entity);
+        if(count == 0 ){
+            return null;
+        }
+        map.put("projectId",entity.getProjectId());
         return map;
     }
 

@@ -5,12 +5,224 @@
 
 <mapper namespace="com.weichaishi.dao.LabacProjectsMapper">
 
-
-   <!-- <insert id="insertOne" keyProperty="projectId" flushCache="true">
-      <selectKey keyProperty="projectId" order="BEFORE" resultType="labacPorjects">
-          select  WCS_P.LABAC_TASK_SEQ.nextval from dual;
+   <insert id="insertOne" parameterType="com.weichaishi.model.LabacProjects" flushCache="true">
+      <selectKey keyProperty="projectId" order="BEFORE" resultType="LabacProjects">
+         select WCS_P.LABAC_TASK_SEQ.nextval as projectId from dual
       </selectKey>
-
-    </insert>-->
-
+      insert into LABAC_PROJECTS
+      <trim prefix="(" suffix=")" suffixOverrides=",">
+         <if test="projectId != null">
+            PROJECT_ID,
+         </if>
+         <if test="projectName != null">
+            PROJECT_NAME,
+         </if>
+         <if test="projectDesc != null">
+            PROJECT_DESC,
+         </if>
+         <if test="projectCreateTime != null">
+            PROJECT_CREATE_TIME,
+         </if>
+         <if test="projectUpdateTime != null">
+            PROJECT_UPDATE_TIME,
+         </if>
+         <if test="projectComments != null">
+            PROJECT_COMMENTS,
+         </if>
+         <if test="projectOwnerCustomerId != null">
+            PROJECT_OWNER_CUSTOMER_ID,
+         </if>
+         <if test="projectQuantity != null">
+            PROJECT_QUANTITY,
+         </if>
+         <if test="projectValue != null">
+            PROJECT_VALUE,
+         </if>
+         <if test="projectType != null">
+            PROJECT_TYPE,
+         </if>
+         <if test="projectLocationFlag != null">
+            PROJECT_LOCATION_FLAG,
+         </if>
+         <if test="projectDisplaySize != null">
+            PROJECT_DISPLAY_SIZE,
+         </if>
+         <if test="projectOrder != null">
+            PROJECT_ORDER,
+         </if>
+         <if test="projectCategories != null">
+            PROJECT_CATEGORIES,
+         </if>
+         <if test="projectFlag != null">
+            PROJECT_FLAG,
+         </if>
+         <if test="projectIcon != null">
+            PROJECT_ICON,
+         </if>
+         <if test="projectStatusIndicator != null">
+            PROJECT_STATUS_INDICATOR,
+         </if>
+         <if test="projectQuantityTried != null">
+            PROJECT_QUANTITY_TRIED,
+         </if>
+         <if test="project3rdPartyReviewFlag != null">
+            PROJECT_3RD_PARTY_REVIEW_FLAG,
+         </if>
+         <if test="projectReviewInstruction != null">
+            PROJECT_REVIEW_INSTRUCTION,
+         </if>
+         <if test="projectRejectReasons != null">
+            PROJECT_REJECT_REASONS,
+         </if>
+         <if test="projectReworkReasons != null">
+            PROJECT_REWORK_REASONS,
+         </if>
+         <if test="projectPreapproveReasons != null">
+            PROJECT_PREAPPROVE_REASONS,
+         </if>
+         <if test="projectDifficultyLevel != null">
+            PROJECT_DIFFICULTY_LEVEL,
+         </if>
+         <if test="projectCategories2 != null">
+            PROJECT_CATEGORIES2,
+         </if>
+         <if test="projectPlanEndDate != null">
+            PROJECT_PLAN_END_DATE,
+         </if>
+         <if test="projectActualEndDate != null">
+            PROJECT_ACTUAL_END_DATE,
+         </if>
+         <if test="saleId != null">
+            SALE_ID,
+         </if>
+         <if test="projectSubject != null">
+            PROJECT_SUBJECT,
+         </if>
+         <if test="projectDetail != null">
+            PROJECT_DETAIL,
+         </if>
+         <if test="projectMaxValue != null">
+            PROJECT_MAX_VALUE,
+         </if>
+         <if test="projectIcon2 != null">
+            PROJECT_ICON2,
+         </if>
+         <if test="projectCategoryFlag != null">
+            PROJECT_CATEGORY_FLAG,
+         </if>
+         <if test="projectLocationsFlag != null">
+            PROJECT_LOCATIONS_FLAG,
+         </if>
+         <if test="projectGroupId != null">
+            PROJECT_GROUP_ID,
+         </if>
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides=",">
+         <if test="projectId != null">
+            #{projectId,jdbcType=DECIMAL},
+         </if>
+         <if test="projectName != null">
+            #{projectName,jdbcType=VARCHAR},
+         </if>
+         <if test="projectDesc != null">
+            #{projectDesc,jdbcType=VARCHAR},
+         </if>
+         <if test="projectCreateTime != null">
+            #{projectCreateTime,jdbcType=TIMESTAMP},
+         </if>
+         <if test="projectUpdateTime != null">
+            #{projectUpdateTime,jdbcType=TIMESTAMP},
+         </if>
+         <if test="projectComments != null">
+            #{projectComments,jdbcType=VARCHAR},
+         </if>
+         <if test="projectOwnerCustomerId != null">
+            #{projectOwnerCustomerId,jdbcType=DECIMAL},
+         </if>
+         <if test="projectQuantity != null">
+            #{projectQuantity,jdbcType=DECIMAL},
+         </if>
+         <if test="projectValue != null">
+            #{projectValue,jdbcType=DECIMAL},
+         </if>
+         <if test="projectType != null">
+            #{projectType,jdbcType=DECIMAL},
+         </if>
+         <if test="projectLocationFlag != null">
+            #{projectLocationFlag,jdbcType=DECIMAL},
+         </if>
+         <if test="projectDisplaySize != null">
+            #{projectDisplaySize,jdbcType=DECIMAL},
+         </if>
+         <if test="projectOrder != null">
+            #{projectOrder,jdbcType=DECIMAL},
+         </if>
+         <if test="projectCategories != null">
+            #{projectCategories,jdbcType=VARCHAR},
+         </if>
+         <if test="projectFlag != null">
+            #{projectFlag,jdbcType=DECIMAL},
+         </if>
+         <if test="projectIcon != null">
+            #{projectIcon,jdbcType=VARCHAR},
+         </if>
+         <if test="projectStatusIndicator != null">
+            #{projectStatusIndicator,jdbcType=DECIMAL},
+         </if>
+         <if test="projectQuantityTried != null">
+            #{projectQuantityTried,jdbcType=DECIMAL},
+         </if>
+         <if test="project3rdPartyReviewFlag != null">
+            #{project3rdPartyReviewFlag,jdbcType=DECIMAL},
+         </if>
+         <if test="projectReviewInstruction != null">
+            #{projectReviewInstruction,jdbcType=VARCHAR},
+         </if>
+         <if test="projectRejectReasons != null">
+            #{projectRejectReasons,jdbcType=OTHER},
+         </if>
+         <if test="projectReworkReasons != null">
+            #{projectReworkReasons,jdbcType=OTHER},
+         </if>
+         <if test="projectPreapproveReasons != null">
+            #{projectPreapproveReasons,jdbcType=OTHER},
+         </if>
+         <if test="projectDifficultyLevel != null">
+            #{projectDifficultyLevel,jdbcType=DECIMAL},
+         </if>
+         <if test="projectCategories2 != null">
+            #{projectCategories2,jdbcType=VARCHAR},
+         </if>
+         <if test="projectPlanEndDate != null">
+            #{projectPlanEndDate,jdbcType=TIMESTAMP},
+         </if>
+         <if test="projectActualEndDate != null">
+            #{projectActualEndDate,jdbcType=TIMESTAMP},
+         </if>
+         <if test="saleId != null">
+            #{saleId,jdbcType=DECIMAL},
+         </if>
+         <if test="projectSubject != null">
+            #{projectSubject,jdbcType=VARCHAR},
+         </if>
+         <if test="projectDetail != null">
+            #{projectDetail,jdbcType=VARCHAR},
+         </if>
+         <if test="projectMaxValue != null">
+            #{projectMaxValue,jdbcType=DECIMAL},
+         </if>
+         <if test="projectIcon2 != null">
+            #{projectIcon2,jdbcType=VARCHAR},
+         </if>
+         <if test="projectCategoryFlag != null">
+            #{projectCategoryFlag,jdbcType=DECIMAL},
+         </if>
+         <if test="projectLocationsFlag != null">
+            #{projectLocationsFlag,jdbcType=DECIMAL},
+         </if>
+         <if test="projectGroupId != null">
+            #{projectGroupId,jdbcType=DECIMAL},
+         </if>
+      </trim>
+   </insert>
 </mapper>

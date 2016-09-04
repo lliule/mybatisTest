@@ -6,24 +6,24 @@ import org.apache.http.HttpStatus;
 public class JsonResponseResult<T> {
 
     /**
-     * ·µ»Ø×´Ì¬ĞÅÏ¢£¬Ä¬ÈÏ200
+     * æ“ä½œçŠ¶æ€ï¼šé»˜è®¤ä¸º200
      */
     private Integer status = HttpStatus.SC_OK;
 
     /**
-     * ·µ»Ø´íÎóÌáÊ¾ĞÅÏ¢£¬Ä¬ÈÏÎªnull
+     *é”™è¯¯ä¿¡æ¯ï¼š é»˜è®¤â€œâ€ ï¼›
      */
     private String errorMsg = "";
 
     /**
-     * ×´Ì¬Âë£¬
-     * T ÇëÇó³É¹¦
-     * F ÇëÇóÊ§°Ü
+     *çŠ¶æ€ç 
+     * T æ“ä½œæˆåŠŸ
+     * F æ“ä½œå¤±è´¥
      */
     private  String code = "T";
 
     /**
-     * ·µ»ØÊı¾İ
+     *ç»“æœä¿¡æ¯
      */
     private  T data;
 

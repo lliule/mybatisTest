@@ -5,5 +5,7 @@ import com.weichaishi.model.LabacProjects;
 
 public interface LabacProjectsMapper extends BaseMapper<LabacProjects,Integer> {
 
-    Integer selectProjectId();
+//    Integer selectProjectId();
+
+    Integer insertOne(LabacProjects labacProjects);
 }

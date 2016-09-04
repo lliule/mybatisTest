@@ -4,6 +4,8 @@ import com.weichaishi.model.LabacProjects;
 import com.weichaishi.result.PageResult;
 import com.weichaishi.service.LabacProjectsService;
 import com.weichaishi.utils.JsonResponseResult;
+import com.weichaishi.utils.SysConstent;
+import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -12,13 +14,6 @@ import tk.mybatis.mapper.util.StringUtil;
 import java.util.List;
 import java.util.Map;
 
-//import org.springframework.http.HttpStatus;
-
-/**
- * Created by Administrator on 2016/8/31.
- *
- * Ìá¹©Labac_projects±í²Ù×÷µÄ½Ó¿Ú
- */
 @Controller
 @RequestMapping("/projects")
 public class LabacProjectAction {
@@ -27,9 +22,9 @@ public class LabacProjectAction {
     private LabacProjectsService labacProjectsService;
 
     /**
-     * ¸ù¾İÌõ¼ş²éÑ¯³öÒ»ÌõÊı¾İ
+     *æ ¹æ®æ¡ä»¶æŸ¥è¯¢ä¸€æ¡ä¿¡æ¯
      * @param labacProjects
-     * @return ×Ô¶¨Òå½á¹ûÀàĞÍ
+     * @return
      */
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
@@ -41,9 +36,9 @@ public class LabacProjectAction {
     }
 
     /**
-     * ¸ù¾İÖ÷¼ü²éÑ¯³öÒ»ÌõÊı¾İ
+     *æ ¹æ®Id æŸ¥è¯¢ä¸€æ¡æ•°æ®
      * @param id
-     * @return ×Ô¶¨Òå½á¹ûÀàĞÍ
+     * @return
      */
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     @ResponseBody
@@ -56,9 +51,9 @@ public class LabacProjectAction {
 
 
     /**
-     * ¸ù¾İÌõ¼ş²éÑ¯½á¹û¼¯
-     * @param labacProjects Ìõ¼şÊµÌå
-     * @return ×Ô¶¨Òå½á¹ûÀàĞÍ
+     *æ ¹æ®æ¡ä»¶æŸ¥è¯¢ç»“æœé›†
+     * @param labacProjects æ¡ä»¶å¯¹è±¡
+     * @return
      */
     @RequestMapping(value = "/list",method = RequestMethod.GET)
     @ResponseBody
@@ -71,9 +66,9 @@ public class LabacProjectAction {
     }
 
     /**
-     * ·ÖÒ³²éÑ¯
-     * @param pageNum
-     * @param pageSize
+     * åˆ†é¡µæŸ¥è¯¢
+     * @param pageNum èµ·å§‹ä½ç½®
+     * @param pageSize æ¯é¡µçš„æ¡æ•°
      * @return
      */
     @RequestMapping(value = "/page",method = RequestMethod.GET)
@@ -87,7 +82,7 @@ public class LabacProjectAction {
     }
 
     /**
-     * ²åÈëÒ»ÌõÊı¾İ
+     *æ’å…¥ä¸€æ¡æ•°æ®
      * @param labacProjects
      * @return
      */
@@ -96,12 +91,17 @@ public class LabacProjectAction {
     public Object insertOne(LabacProjects labacProjects){
         JsonResponseResult<Map<String,Object>> jsonResponseResult = new JsonResponseResult<Map<String, Object>>();
         Map<String, Object> map = labacProjectsService.insertOne(labacProjects);
+        if(map == null){
+            jsonResponseResult.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+            jsonResponseResult.setCode(SysConstent.ERRCODE);
+            jsonResponseResult.setErrorMsg(SysConstent.INSERTERR);
+        }
         jsonResponseResult.setData(map);
         return jsonResponseResult;
     }
 
     /**
-     * ĞŞ¸ÄÊı¾İ
+     *ä¿®æ”¹ä¸€æ¡æ•°æ®
      * @param labacProjects
      * @return
      */
@@ -110,34 +110,17 @@ public class LabacProjectAction {
     public Object update(LabacProjects labacProjects){
         JsonResponseResult<Integer> jsonResponseResult =  new JsonResponseResult<Integer>();
         Integer count = labacProjectsService.updateBySelective(labacProjects);
-        jsonResponseResult.setData(count);
+        if(count == 0){
+            jsonResponseResult.setCode(SysConstent.ERRCODE);
+            jsonResponseResult.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+            jsonResponseResult.setErrorMsg(SysConstent.UPDATEERR);
+        }
         return jsonResponseResult;
     }
 
-    /**
-     * ¸ù¾İÌõ¼şÉ¾³ı
-     *
-     * ±¾²âÊÔ·½·¨ÔİÊ±Ìá¹©ÒÔ projectDescÖµÎª×Ö¶Î£¡£¡
-     *
-     * @param labacProjects
-     * @return
-     */
-    @RequestMapping(method = RequestMethod.DELETE)
-    @ResponseBody
-    public Object delete(LabacProjects labacProjects){
-        JsonResponseResult<Object> result = new JsonResponseResult<Object>();
-        if(StringUtil.isEmpty(labacProjects.getProjectDesc())){
-            result.setErrorMsg("Ìõ¼şĞÅÏ¢´íÎó£¡");
-            return result;
-        }
-
-        Integer count = labacProjectsService.delete(labacProjects);
-        result.setData(count);
-        return result;
-    }
 
     /**
-     * ¸ù¾İÖ÷¼üÉ¾³ıÒ»ÌõÊı¾İ
+     *æ ¹æ®ä¸»é”®åˆ é™¤æ•°æ®ä¿¡æ¯
      * @param key
      * @return
      */
@@ -146,7 +129,11 @@ public class LabacProjectAction {
     public Object deleteByPrimaryKey(@PathVariable("key")Integer key){
         JsonResponseResult<Integer> jsonResponseResult = new JsonResponseResult<Integer>();
         Integer count  = labacProjectsService.deleteByPrimaryKey(key);
-        jsonResponseResult.setData(count);
+        if(count == 0){
+            jsonResponseResult.setCode(SysConstent.ERRCODE);
+            jsonResponseResult.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
+            jsonResponseResult.setErrorMsg(SysConstent.DELETEERR);
+        }
         return jsonResponseResult;
     }
 }
