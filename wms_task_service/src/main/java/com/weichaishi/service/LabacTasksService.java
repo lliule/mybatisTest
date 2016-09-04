@@ -19,7 +19,7 @@ import java.util.Map;
 
 /**
  *
- *labac_tasks±í ²Ù×÷service
+ *labac_tasksè¡¨  æ“ä½œservice
  */
 @Service
 public class LabacTasksService extends BaseService<LabacTasks,Integer> {
@@ -69,10 +69,10 @@ public class LabacTasksService extends BaseService<LabacTasks,Integer> {
     }
 
     /**
-     * ¸ù¾İ  taskCityId Ìõ¼ş·ÖÒ³²éÑ¯
-     * @param pageNum ÆôÊ¾Êı¾İÎ»ÖÃ
-     * @param pageSize Ã¿Ò³µÄÌõÊı
-     * @return ·ÖÒ³½á¹û
+     * æ¡ä»¶åˆ†é¡µæŸ¥è¯¢
+     * @param pageNum
+     * @param pageSize
+     * @return
      */
     public PageResult queryListByPage(Integer pageNum,Integer pageSize){
         PageHelper.startPage(pageNum,pageSize);
@@ -111,7 +111,7 @@ public class LabacTasksService extends BaseService<LabacTasks,Integer> {
 
 
     /**
-     * ÅúÁ¿²åÈë
+     * æ‰¹é‡æ’å…¥
      * @param labacTasksList
      * @return
      */
@@ -123,10 +123,11 @@ public class LabacTasksService extends BaseService<LabacTasks,Integer> {
         }
         return super.insertBatch(labacTasksList);
     }
+
     /**
-     * ½á¹û´¦Àí
-     * ´¦Àí taskLocGeo  ×Ö¶Î ²»ÄÜ±»Json»¯
-     * @param labacTasks ĞèÒª´¦ÀíµÄ¶ÔÏó
+     * å¤„ç† taskLocGeo å­—æ®µ
+     *è§£å†³ è¯¥å­—æ®µä¸èƒ½è¢«jsonåŒ–ã€‚ å°†è¯¥å­—æ®µæ‹†åˆ†ä¸ºå¤šä¸ªå­—æ®µ
+     * @param labacTasks
      */
     private void doTaskLocGeo(LabacTasks labacTasks){
         if(labacTasks != null) {
@@ -154,8 +155,7 @@ public class LabacTasksService extends BaseService<LabacTasks,Integer> {
     }
 
     /**
-     * ½á¹û¼¯µÄÊı¾İ´¦Àí
-     * ´¦ÀíÃ¿Ò»¸ö½á¹ûµÄ taskLocGeo ×Ö¶Î
+     * æ‰¹é‡å¤„ç†taskLocGeoå­—æ®µ
      * @param list
      */
     private void doTaskLocGeoForList(List<LabacTasks> list){

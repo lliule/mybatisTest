@@ -4,6 +4,7 @@ import com.weichaishi.model.LabacTasks;
 import com.weichaishi.result.PageResult;
 import com.weichaishi.service.LabacTasksService;
 import com.weichaishi.utils.JsonResponseResult;
+import com.weichaishi.utils.SysConstent;
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,10 +13,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.Map;
 
-/**
- *
- * Ìá¹© labac_tasks±í²Ù×÷½Ó¿Ú
- */
 @Controller
 @RequestMapping("/tasks")
 public class LabacTasksAction {
@@ -23,9 +20,8 @@ public class LabacTasksAction {
     @Autowired
     private LabacTasksService labacTasksService;
 
-    private static  final String FALSE = "F";
     /**
-     *  ²éÑ¯Ò»ÌõĞÅÏ¢
+     * æ¡ä»¶æŸ¥è¯¢ä¸€æ¡ä¿¡æ¯
      * @param labacTasks
      * @return
      */
@@ -38,6 +34,11 @@ public class LabacTasksAction {
         return result;
     }
 
+    /**
+     * æ ¹æ®id æŸ¥è¯¢ä¸€æ¡ä¿¡æ¯
+     * @param id
+     * @return
+     */
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     @ResponseBody
     public Object queryOneById(@PathVariable("id") Integer id){
@@ -48,7 +49,7 @@ public class LabacTasksAction {
     }
 
     /**
-     * ¸ù¾İÌõ¼ş²éÑ¯½á¹û¼¯
+     *æ ¹æ®æ¡ä»¶æŸ¥è¯¢ç»“æœé›†
      * @param labacTasks
      * @return
      */
@@ -62,7 +63,7 @@ public class LabacTasksAction {
     }
 
     /**
-     * ·ÖÒ³²éÑ¯
+     * åˆ†é¡µæŸ¥è¯¢
      * @param pageNum
      * @param pageSize
      * @return
@@ -78,7 +79,7 @@ public class LabacTasksAction {
     }
 
     /**
-     * ²åÈëÒ»ÌõÊı¾İĞÅÏ¢
+     * æ’å…¥ä¸€æ¡æ•°æ®
      * @param labacTasks
      * @return
      */
@@ -88,8 +89,8 @@ public class LabacTasksAction {
         JsonResponseResult<Map<String,Object>> result = new JsonResponseResult<Map<String,Object>>();
         Map<String, Object> map = labacTasksService.insertOne(labacTasks);
         if(map == null){
-            result.setErrorMsg("Ìí¼ÓÊı¾İÊ§°Ü£¡");
-            result.setCode(FALSE);
+            result.setErrorMsg(SysConstent.INSERTERR);
+            result.setCode(SysConstent.ERRCODE);
             result.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
         }
         result.setData(map);
@@ -97,7 +98,7 @@ public class LabacTasksAction {
     }
 
     /**
-     * ¸üĞÂÒ»ÌõÊı¾İĞÅÏ¢
+     * ä¿®æ”¹ä¸€æ¡ä¿¡æ¯
      * @param labacTasks
      * @return
      */
@@ -107,16 +108,16 @@ public class LabacTasksAction {
         JsonResponseResult<Integer> result = new JsonResponseResult<Integer>();
         Integer count = labacTasksService.updateBySelective(labacTasks);
         if (count == 0) {
-            result.setErrorMsg("¸üĞÂÊı¾İÊ§°Ü£¡");
+            result.setErrorMsg(SysConstent.UPDATEERR);
             result.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
-            result.setCode(FALSE);
+            result.setCode(SysConstent.ERRCODE);
         }
         return result;
     }
 
 
     /**
-     * ¸ù¾İÖ÷¼üÉ¾³ıÒ»ÌõÊı¾İĞÅÏ¢
+     * åˆ é™¤ä¸€æ¡ä¿¡æ¯
      * @param key
      * @return
      */
@@ -126,16 +127,16 @@ public class LabacTasksAction {
         JsonResponseResult<Integer> result = new JsonResponseResult<Integer>();
         Integer count = labacTasksService.deleteByPrimaryKey(key);
         if(count == 0){
-            result.setErrorMsg("Êı¾İÉ¾³ıÊ§°Ü£¡");
-            result.setCode(FALSE);
+            result.setErrorMsg(SysConstent.DELETEERR);
+            result.setCode(SysConstent.ERRCODE);
             result.setStatus(HttpStatus.SC_INTERNAL_SERVER_ERROR);
         }
         return result;
     }
 
     /**
-     * ·ÖÒ³Ìõ¼ş²éÑ¯
-     * TODO  SERVICE ²ãÉèÖÃÌõ¼ş
+     * æ¡ä»¶åˆ†é¡µæŸ¥è¯¢
+     * TODO  SERVICE ç»„è£…æ¡ä»¶
      */
     /*@RequestMapping(value = "/list/page",method = RequestMethod.GET)
     @ResponseBody

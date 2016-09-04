@@ -12,8 +12,8 @@ import java.util.List;
 
 /**
  *
- * Í¨ÓÃµÄserviceÀà£¬»ù±¾ÒµÎñ²ãµÄ¹«ÓÃ·½·¨³éÈ¡Àà¡£
- * Ö»Ö§³Ö¼Ì³ĞÊ¹ÓÃ
+ * é€šç”¨serviceï¼Œ
+ * åªèƒ½è¢«ç»§æ‰¿ä½¿ç”¨
  */
 public abstract class BaseService<T,ID extends Serializable> {
 
@@ -21,7 +21,7 @@ public abstract class BaseService<T,ID extends Serializable> {
     private BaseMapper<T,ID> baseMapper;
 
     /**
-     * ¸ù¾İÌõ¼ş²éÑ¯Ò»¸ö¶ÔÏóĞÅÏ¢
+     *æŸ¥è¯¢ä¸€ä¸ªä¿¡æ¯
      * @param entity
      * @return
      */
@@ -33,7 +33,7 @@ public abstract class BaseService<T,ID extends Serializable> {
     }
 
     /**
-     * ¸ù¾İÖ÷¼ü²éÑ¯Ò»¸ö¶ÔÏóĞÅÏ¢
+     * æ ¹æ®ä¸»é”®æŸ¥è¯¢ä¸€ä¸ªå¯¹è±¡
      * @param key
      * @return
      */
@@ -42,8 +42,7 @@ public abstract class BaseService<T,ID extends Serializable> {
     }
 
     /**
-     * ²éÑ¯ËùÓĞ¶ÔÏóĞÅÏ¢
-     * É÷ÓÃ£¡
+     *æŸ¥è¯¢æ‰€æœ‰
      * @return
      */
     public List<T> queryAll(){
@@ -51,7 +50,7 @@ public abstract class BaseService<T,ID extends Serializable> {
     }
 
     /**
-     * ¸ù¾İÌõ¼ş²éÑ¯½á¹û¼¯
+     * æ ¹æ®æ¡ä»¶æŸ¥è¯¢ç»“æœé›†
      * @param entity
      * @return
      */
@@ -59,9 +58,9 @@ public abstract class BaseService<T,ID extends Serializable> {
         return baseMapper.select(entity);
     }
     /**
-     * ·ÖÒ³²éÑ¯
-     * @param pageNum ²éÑ¯µÄ³õÊ¼Î»ÖÃ
-     * @param pageSize Ã¿Ò³µÄÌõÊı
+     * åˆ†é¡µæŸ¥è¯¢
+     * @param pageNum èµ·å§‹ä½ç½®
+     * @param pageSize æ¯é¡µçš„æ¡æ•°
      * @return
      */
     public PageResult queryPage(Integer pageNum,Integer pageSize){
@@ -77,7 +76,7 @@ public abstract class BaseService<T,ID extends Serializable> {
     }
 
     /**
-     * ²åÈëÒ»ÌõÊı¾İ
+     *æ’å…¥ä¸€æ¡æ•°æ®ä¿¡æ¯
      * @param entity
      * @return
      */
@@ -89,7 +88,7 @@ public abstract class BaseService<T,ID extends Serializable> {
 
 
     /**
-     * ÅúÁ¿²åÈë
+     *æ‰¹é‡æ’å…¥
      * @param list
      * @return
      */
@@ -97,9 +96,7 @@ public abstract class BaseService<T,ID extends Serializable> {
         return baseMapper.insertList(list);
     }
     /**
-     * ¸ù¾İÖ÷¼üĞŞ¸ÄÊı¾İĞÅÏ¢£¬ÊµÌåÖĞ±ØĞëÒªÓĞÖ÷¼üĞÅÏ¢
-     * Èç¹ûÆäËû²ÎÊı²»¸³Öµ£¬È«²¿ĞŞ¸ÄÎªNull
-     *
+     ä¿®æ”¹æ•°æ®ä¿¡æ¯
      * @param entity
      * @return
      */
@@ -107,11 +104,11 @@ public abstract class BaseService<T,ID extends Serializable> {
         return baseMapper.updateByPrimaryKey(entity);
     }
 
+
     /**
-     * ¸ù¾İÖ÷¼üĞŞ¸ÄÊı¾İĞÅÏ¢¡£ÊµÌåÖĞ±ØĞëÒªÓĞÖ÷¼üĞÅÏ¢
-     * Èç¹ûÆäËû²ÎÊı²»¸³Öµ£¬ÔòÄ¬ÈÏ²»ĞŞ¸Ä
-     * TODO£º ÄÜ·ñÍ¨¹ı·´Éä»úÖÆĞŞ¸Ä¸Ã¶ÔÏóµÄ¸üĞÂÊ±¼ä£¬À´Í³Ò»ÊµÏÖ¸üĞÂÊ±¼äµÄË¢ĞÂ
-     * @param entity ´«µİµÄÊµÌåÀà²ÎÊı
+     * æ¡ä»¶ä¿®æ”¹ä¿¡æ¯
+     * å…¶ä»–ä¸ä¿®æ”¹çš„å­—æ®µé»˜è®¤ä¸å˜
+     * @param entity
      * @return
      */
     public Integer updateBySelective(T entity){
@@ -140,16 +137,16 @@ public abstract class BaseService<T,ID extends Serializable> {
     }
 
     /**
-     * ¸ù¾İÖ÷¼üÉ¾³ıÊı¾İĞÅÏ¢
-     * @param key Ö÷¼üÖµ
-     * @return Êı¾İ¿â±»Ó°ÏìµÄÌõÊı
+     * æ ¹æ®ä¸»é”®åˆ é™¤
+     * @param key
+     * @return
      */
     public Integer deleteByPrimaryKey(ID key){
         return baseMapper.deleteByPrimaryKey(key);
     }
 
     /**
-     * ¸ù¾İÌõ¼şÉ¾³ıÊı¾İĞÅÏ¢
+     * æ ¹æ®æ¡ä»¶åˆ é™¤
      * @param entity
      * @return
      */
@@ -158,7 +155,7 @@ public abstract class BaseService<T,ID extends Serializable> {
     }
 
     /**
-     * ¸ù¾İÖ÷¼ü²éÑ¯
+     * æ ¹æ®Id æŸ¥è¯¢ä¸€æ¡ä¿¡æ¯
      * @param id
      * @return
      */

@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  *
- * ·ÖÒ³²éÑ¯µÄ·â×°½á¹ûÀà
+ * åˆ†é¡µç»“æœå°è£…ç±»
  */
 public class PageResult {
 
