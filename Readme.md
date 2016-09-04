@@ -1,46 +1,41 @@
-labac_projects±í²Ù×÷£º
+labac_projectsè¡¨æ“ä½œçš„api æ¥å£
 
-/projects  + Get  queryOne:¸ù¾İÌõ¼ş²éÑ¯³öÒ»ÌõÊı¾İ £»
+/projects  + Get  queryOne:æ ¹æ®æ¡ä»¶æŸ¥è¯¢ä¸€ä¸ªå¯¹è±¡ä¿¡æ¯
 
-/projects/{id} +Get   queryOneById:¸ù¾İÖ÷¼üÖµ²éÑ¯Ò»ÌõÊı¾İ£»
+/projects/{id} +Get   queryOneById:æ ¹æ®ä¹‹é—´æŸ¥è¯¢ä¸€æ¡ä¿¡æ¯
 
-/projects/list   +Get  queryList:¸ù¾İÌõ¼ş²éÑ¯½á¹û¼¯£»
+/projects/list   +Get  queryList:æ ¹æ®æ¡ä»¶æŸ¥è¯¢ç»“æœé›†
 
-/projects/page  +Get  queryPage:·ÖÒ³²éÑ¯
+/projects/page  +Get  queryPage:åˆ†é¡µä¸‹æ—¬
 
-/projects   +Post   insertOne:²åÈëÒ»ÌõÊı¾İ£¬ÈôÊµÌåÆäËû×Ö¶ÎÎªNULL£¬²åÈëNULL
+/projects   +Post   insertOne:æ’å…¥ä¸€æ¡æ•°æ®
 
-/projects  +Put   update: ¸ù¾İÖ÷¼üĞŞ¸ÄÊı¾İĞÅÏ¢£¬ÆäËû×Ö¶ÎÎªnull£¬Ä¬ÈÏ²»ĞŞ¸Ä
-
-/projects  +DELETE  delete£º¸ù¾İÌõ¼şÉ¾³ıÊı¾İĞÅÏ¢£¬±¾ÀıÔİÊ±Ìá¹©ÒÔprojectDescÖµÎªÌõ¼ş½øĞĞÉ¾³ı¡£
-×¢Òâ±¾·½·¨Ò»¶¨ÒªÏŞÖÆÌõ¼şÉ¾³ı£¬·ñÔòÉ¾³ı±íÖĞËùÓĞÊı¾İ¡£
-
-/projects/{key}   +DELETE     deleteByPrimaryKey£º¸ù¾İÖ÷¼üÖµÉ¾³ıÊı¾İĞÅÏ¢
+/projects  +Put   update: æ›´æ–°ä¸€æ¡æ•°æ®
 
 
-labac_tasks±í²Ù×÷£º
-/tasks  + Get  queryOne:¸ù¾İÌõ¼ş²éÑ¯³öÒ»ÌõÊı¾İ £»
-
-/tasks/{id} +Get   queryOneById:¸ù¾İÖ÷¼üÖµ²éÑ¯Ò»ÌõÊı¾İ£»
-
-/tasks/list   +Get  queryList:¸ù¾İÌõ¼ş²éÑ¯½á¹û¼¯£»
-
-/tasks/page  +Get  queryPage:·ÖÒ³²éÑ¯
+/projects/{key}   +DELETE     deleteByPrimaryKeyï¼šæ ¹æ®ä¹‹é—´åˆ é™¤ä¸€æ¡æ•°æ®
 
 
-/tasks   +Post   insertOne:²åÈëÒ»ÌõÊı¾İ£¬ÈôÊµÌåÆäËû×Ö¶ÎÎªNULL£¬²åÈëNULL
+labac_tasksè¡¨æ“ä½œAPIæ¥å£è¯´æ˜ï¼š
+/tasks  + Get  queryOne:æ ¹æ®æ¡ä»¶æŸ¥è¯¢å‡ºä¸€æ¡æ•°æ® ï¼›
 
-/tasks  +Put   update: ¸ù¾İÖ÷¼üĞŞ¸ÄÊı¾İĞÅÏ¢£¬ÆäËû×Ö¶ÎÎªnull£¬Ä¬ÈÏ²»ĞŞ¸Ä
+/tasks/{id} +Get   queryOneById:æ ¹æ®ä¸»é”®æŸ¥è¯¢ä¸€æ¡æ•°æ®
 
-/tasks  +DELETE  delete£º¸ù¾İÌõ¼şÉ¾³ıÊı¾İĞÅÏ¢£¬±¾ÀıÔİÊ±Ìá¹©ÒÔtaskCityIdÖµÎªÌõ¼ş½øĞĞÉ¾³ı¡£
-×¢Òâ±¾·½·¨Ò»¶¨ÒªÏŞÖÆÌõ¼şÉ¾³ı£¬·ñÔòÉ¾³ı±íÖĞËùÓĞÊı¾İ¡£
+/tasks/list   +Get  queryList:æ ¹æ®æ¡ä»¶æŸ¥è¯¢ç»“æœé›†ï¼›
 
-/tasks/{key}   +DELETE     deleteByPrimaryKey£º¸ù¾İÖ÷¼üÖµÉ¾³ıÊı¾İĞÅÏ¢
+/tasks/page  +Get  queryPage:åˆ†é¡µæŸ¥è¯¢
+
+/tasks   +Post   insertOne:æ’å…¥ä¸€æ¡æ•°æ®ï¼Œè‹¥å®ä½“å…¶ä»–å­—æ®µä¸ºNULLï¼Œæ’å…¥NULL
+
+/tasks  +Put   update: æ ¹æ®ä¸»é”®ä¿®æ”¹æ•°æ®ä¿¡æ¯ï¼Œå…¶ä»–å­—æ®µä¸ºnullï¼Œé»˜è®¤ä¸ä¿®æ”¹
+
+
+/tasks/{key}   +DELETE     deleteByPrimaryKeyï¼šæ ¹æ®ä¸»é”®å€¼åˆ é™¤æ•°æ®ä¿¡æ¯
 
 
 ***************
-¹ØÓÚlabac_tasks µÄ task_loc_geo×Ö¶ÎµÄ´¦Àí°ì·¨£º
-²ğ·Ö×é×°ºóµÄÊı¾İÈç£º
+labac_tasks çš„ task_loc_geoå­—æ®µçš„å¤„ç†åŠæ³•ï¼š
+æ‹†åˆ†ç»„è£…åçš„æ•°æ®å¦‚ï¼š
 taskSdoGtype: 2001
 taskSdosrid: 8307
 taskSoPointX: 116.416379
@@ -48,9 +43,10 @@ taskSdoPointY: 40.060228
 taskSdoPointZ: null
 taskSdoOrdinates: null
 taskSdoElemInfo: null
-¶ø²»ÔÙÓĞtaskLocGeo×Ö¶Î
+è€Œä¸åœ¨æœ‰taskLocGeoå­—æ®µ
 
 *******************
-TODO£º
-1¡¢Ğ´Advanced Rest ClientµÄÊ¹ÓÃÎÄµµ
-2¡¢Ğ´mybatis·´×ª±íÉú³ÉÊµÌåµÄÎÄµµ
+TODOï¼š
+1ã€å†™Advanced Rest Clientçš„ä½¿ç”¨æ–‡æ¡£
+2ã€å†™mybatisåè½¬è¡¨ç”Ÿæˆå®ä½“çš„æ–‡æ¡£
+
