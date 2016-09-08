@@ -225,4 +225,120 @@
          </if>
       </trim>
    </insert>
+
+   <!-- 定义存储过程的参数
+      注意：property的值，一定要是传递进来的参数值一样！否则接收不到！也就是说我map中的key，必须是projectId!
+      type:表示接受的参数类型
+    -->
+   <parameterMap id="param" type="java.util.Map">
+      <!-- property:接受的参数名
+            mode:该参数是输入参数还是输出参数
+               如果mode是OUT,该参数不需要传递，但是map集合取值应为：map.get("id");
+            jdbcType:指定参数的类型
+       -->
+      <parameter property="projectId" mode="IN" jdbcType="DECIMAL" />
+      <parameter property="id" mode="OUT" jdbcType="DECIMAL" />
+   </parameterMap>
+
+   <!-- 调用存储过程示例
+         接受一个project_id ，返回该id
+   -->
+   <select id="selectDemo" statementType="CALLABLE" parameterMap="param">
+      <![CDATA[call wcs_s.project(?,?)]]>
+   </select>
+
+
+   <!-- 多表查询示例 -->
+   <select id="selectProjectAndTasks" resultMap="getTasks">
+      select
+      <include refid="projectColumns"/>,
+      <include refid="taskColumns"/>
+      from labac_projects lp left join labac_tasks lt on lp.project_id = lt.task_project_id
+   </select>
+
+   <!-- 结果集map:将查询到的关联表类容映射到主表对应的私有属性中
+    type:最终的映射的结果类型：主表的类型
+    autoMapping:自动映射
+    -->
+   <resultMap id="getTasks" type="LabacProjects" autoMapping="true">
+      <!-- 主表的id -->
+      <id property="projectId" column="project_id" />
+      <!-- 表与表的关系 oneToMany;
+            property:主表中关联的表的实体属性名
+            javaType:映射的结果类型
+            ofType:如果javaType 是list，则用它来制定list的泛型类型
+            autoMapping：是否自动映射字段到属性
+       -->
+      <collection property="labacTasks" javaType="List" ofType="LabacTasks" autoMapping="true">
+         <!-- 关联表的id
+          property:主键的属性名
+          column：主键的字段名
+          -->
+         <id property="taskId" column="task_id"/>
+      </collection>
+   </resultMap>
+
+   <!-- labac_projects 的基本字段 -->
+   <sql id="projectColumns">
+       lp.PROJECT_ID, lp.PROJECT_NAME, lp.PROJECT_DESC, lp.PROJECT_CREATE_TIME, lp.PROJECT_UPDATE_TIME,
+    lp.PROJECT_COMMENTS, lp.PROJECT_OWNER_CUSTOMER_ID, lp.PROJECT_QUANTITY, lp.PROJECT_VALUE, lp.PROJECT_TYPE,
+    lp.PROJECT_LOCATION_FLAG, lp.PROJECT_DISPLAY_SIZE, lp.PROJECT_ORDER, lp.PROJECT_CATEGORIES, lp.PROJECT_FLAG,
+    lp.PROJECT_ICON, lp.PROJECT_STATUS_INDICATOR, lp.PROJECT_QUANTITY_TRIED, lp.PROJECT_3RD_PARTY_REVIEW_FLAG,
+    lp.PROJECT_REVIEW_INSTRUCTION, lp.PROJECT_REJECT_REASONS, lp.PROJECT_REWORK_REASONS, lp.PROJECT_PREAPPROVE_REASONS,
+    lp.PROJECT_DIFFICULTY_LEVEL, lp.PROJECT_CATEGORIES2, lp.PROJECT_PLAN_END_DATE, lp.PROJECT_ACTUAL_END_DATE,
+    lp.SALE_ID, lp.PROJECT_SUBJECT, lp.PROJECT_DETAIL, lp.PROJECT_MAX_VALUE, lp.PROJECT_ICON2, lp.PROJECT_CATEGORY_FLAG,
+    lp.PROJECT_LOCATIONS_FLAG, lp.PROJECT_GROUP_ID
+   </sql>
+
+   <!-- labac_tasks的基本字段 -->
+   <sql id="taskColumns">
+      lt.TASK_ID, lt.TASK_PROJECT_ID, lt.TASK_LOCATION_FLAG, lt.TASK_CITY_ID, lt.TASK_BEGIN_TIME, lt.TASK_END_TIME,
+    lt.TASK_REWARD_VALUE, lt.TASK_QUANTITY, lt.TASK_QUANTITY_USED, lt.TASK_CREATE_TIME, lt.TASK_UPDATE_TIME,
+    lt.TASK_PHOTO_NUMBER, lt.TASK_QUESTION_NUMBER, lt.TASK_ACTION_NUMBER, lt.TASK_SUBJECT, lt.TASK_REWARD_POINT,
+    lt.TASK_DETAIL, lt.TASK_FLAG, lt.TASK_GIFT_FLAG, lt.TASK_TITLE, lt.TASK_APPROVAL_FLAG, lt.TASK_APPROVAL_QUESTION,
+    lt.TASK_MULTIPLE_ASSIGNMENT_ALLOW, lt.TASK_DETAIL_ID, lt.TASK_REF_ID, lt.TASK_CATEGORY_ID, lt.TASK_SUBMIT_DURATION,
+    lt.TASK_PROVINCE_ID, lt.TASK_DIFFICULTY_LEVEL, lt.TASK_REWARD_TYPE, lt.TASK_RESPONSE_KEY_STEP,
+    lt.TASK_PREREQ_TASK_ID, lt.TASK_POST_TASK_ID, lt.TASK_REWARD_PAYABLE_FLAG, lt.TASK_RULE_FLAG,
+    lt.TASK_REWARD_UNIT_VALUE, lt.TASK_MAX_MULTIPLE_ASSIGN_ALLOW, lt.TASK_REVIEW_DURATION, lt.TASK_REVIEW_FLAG,
+    lt.TASK_SUPPORT_DEVICE_TYPE, lt.TASK_DEFINITION, lt.TASK_AUTO_APPROVE_FLAG, lt.TASK_MULTIPLE_SUBMISSION_ALLOW,
+    lt.TASK_REFER_DETAIL, lt.TASK_EXCEPTION_DETAIL_ID, lt.TASK_EXCEPTION_MESSAGE, lt.TASK_PREVIEW_FLAG,
+    lt.TASK_LOC_NAME, lt.TASK_LOC_ADDRESS, lt.TASK_LOC_GEO, lt.TASK_LOC_SOURCE, lt.TASK_LOC_PHONE, lt.TASK_LOC_REF_ID,
+    lt.TASK_DATASOURCE, lt.TASK_DISPLAY_FLAG, lt.TASK_REFERRABLE_FLAG, lt.TASK_REFERRABLE_REWARD_VALUE,
+    lt.TASK_REFERRABLE_REWARD_POINT, lt.TASK_REFERRABLE_MESSAGE, lt.TASK_ORDER, lt.TASK_RECOMMENDEE_REWARD_VALUE,
+    lt.TASK_TYPE, lt.TASK_ENGINE
+   </sql>
+
+<!-- 视图示例 -->
+
+   <select id="selectView" resultType="ProjectsTasksView" >
+      select
+       <include refid="ptvColumns"/>
+       from wcs_s.getProjectAndTasks
+   </select>
+<!-- 视图的基础字段 -->
+   <sql id="ptvColumns" >
+      PROJECT_ID, PROJECT_NAME, PROJECT_DESC, PROJECT_CREATE_TIME, PROJECT_UPDATE_TIME,
+      PROJECT_COMMENTS, PROJECT_OWNER_CUSTOMER_ID, PROJECT_QUANTITY, PROJECT_VALUE, PROJECT_TYPE,
+      PROJECT_LOCATION_FLAG, PROJECT_DISPLAY_SIZE, PROJECT_ORDER, PROJECT_CATEGORIES, PROJECT_FLAG,
+      PROJECT_ICON, PROJECT_STATUS_INDICATOR, PROJECT_QUANTITY_TRIED, PROJECT_3RD_PARTY_REVIEW_FLAG,
+      PROJECT_REVIEW_INSTRUCTION, PROJECT_REJECT_REASONS, PROJECT_REWORK_REASONS, PROJECT_PREAPPROVE_REASONS,
+      PROJECT_DIFFICULTY_LEVEL, PROJECT_CATEGORIES2, PROJECT_PLAN_END_DATE, PROJECT_ACTUAL_END_DATE,
+      SALE_ID, PROJECT_SUBJECT, PROJECT_DETAIL, PROJECT_MAX_VALUE, PROJECT_ICON2, PROJECT_CATEGORY_FLAG,
+      PROJECT_LOCATIONS_FLAG, PROJECT_GROUP_ID, TASK_ID, TASK_PROJECT_ID, TASK_LOCATION_FLAG,
+      TASK_CITY_ID, TASK_BEGIN_TIME, TASK_END_TIME, TASK_REWARD_VALUE, TASK_QUANTITY, TASK_QUANTITY_USED,
+      TASK_CREATE_TIME, TASK_UPDATE_TIME, TASK_PHOTO_NUMBER, TASK_QUESTION_NUMBER, TASK_ACTION_NUMBER,
+      TASK_SUBJECT, TASK_REWARD_POINT, TASK_DETAIL, TASK_FLAG, TASK_GIFT_FLAG, TASK_TITLE,
+      TASK_APPROVAL_FLAG, TASK_APPROVAL_QUESTION, TASK_MULTIPLE_ASSIGNMENT_ALLOW, TASK_DETAIL_ID,
+      TASK_REF_ID, TASK_CATEGORY_ID, TASK_SUBMIT_DURATION, TASK_PROVINCE_ID, TASK_DIFFICULTY_LEVEL,
+      TASK_REWARD_TYPE, TASK_RESPONSE_KEY_STEP, TASK_PREREQ_TASK_ID, TASK_POST_TASK_ID,
+      TASK_REWARD_PAYABLE_FLAG, TASK_RULE_FLAG, TASK_REWARD_UNIT_VALUE, TASK_MAX_MULTIPLE_ASSIGN_ALLOW,
+      TASK_REVIEW_DURATION, TASK_REVIEW_FLAG, TASK_SUPPORT_DEVICE_TYPE, TASK_DEFINITION,
+      TASK_AUTO_APPROVE_FLAG, TASK_MULTIPLE_SUBMISSION_ALLOW, TASK_REFER_DETAIL, TASK_EXCEPTION_DETAIL_ID,
+      TASK_EXCEPTION_MESSAGE, TASK_PREVIEW_FLAG, TASK_LOC_NAME, TASK_LOC_ADDRESS, TASK_LOC_GEO,
+      TASK_LOC_SOURCE, TASK_LOC_PHONE, TASK_LOC_REF_ID, TASK_DATASOURCE, TASK_DISPLAY_FLAG,
+      TASK_REFERRABLE_FLAG, TASK_REFERRABLE_REWARD_VALUE, TASK_REFERRABLE_REWARD_POINT,
+      TASK_REFERRABLE_MESSAGE, TASK_ORDER, TASK_RECOMMENDEE_REWARD_VALUE, TASK_TYPE, TASK_ENGINE,
+      ROW_ID
+   </sql>
+
 </mapper>

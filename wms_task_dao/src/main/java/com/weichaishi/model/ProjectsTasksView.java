@@ -2,19 +2,86 @@ package com.weichaishi.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import javax.persistence.Id;
+import javax.persistence.Column;
 import javax.persistence.Table;
 import javax.persistence.Transient;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+@Table(name="wcs_s.getProjectAndtasks")
+public class ProjectsTasksView {
 
-@Table(name = "labac_tasks")
-public class LabacTasks implements Serializable {
+    private Integer projectId;
 
-    @Id
-    private Integer taskId;
+    private String projectName;
 
+    private String projectDesc;
+
+    private Date projectCreateTime;
+
+    private Date projectUpdateTime;
+
+    private String projectComments;
+
+    private BigDecimal projectOwnerCustomerId;
+
+    private Long projectQuantity;
+
+    private BigDecimal projectValue;
+
+    private Short projectType;
+
+    private Short projectLocationFlag;
+
+    private Short projectDisplaySize;
+
+    private BigDecimal projectOrder;
+
+    private String projectCategories;
+
+    private Short projectFlag;
+
+    private String projectIcon;
+
+    private Short projectStatusIndicator;
+
+    private BigDecimal projectQuantityTried;
+
+    @Column(name = "project_3rd_party_review_flag")
+    private Short project3rdPartyReviewFlag;
+
+    private String projectReviewInstruction;
+
+    private Object projectRejectReasons;
+
+    private Object projectReworkReasons;
+
+    private Object projectPreapproveReasons;
+
+    private Short projectDifficultyLevel;
+
+    private String projectCategories2;
+
+    private Date projectPlanEndDate;
+
+    private Date projectActualEndDate;
+
+    private Short saleId;
+
+    private String projectSubject;
+
+    private String projectDetail;
+
+    private BigDecimal projectMaxValue;
+
+    private String projectIcon2;
+
+    private Short projectCategoryFlag;
+
+    private Short projectLocationsFlag;
+
+    private Short projectGroupId;
+
+    private BigDecimal taskId;
 
     private BigDecimal taskProjectId;
 
@@ -76,17 +143,17 @@ public class LabacTasks implements Serializable {
 
     private Short taskResponseKeyStep;
 
-    //    @JsonIgnore
     private BigDecimal taskPrereqTaskId;
 
-    //    @JsonIgnore
     private BigDecimal taskPostTaskId;
+
     private Short taskRewardPayableFlag;
 
     private Short taskRuleFlag;
-    private Short taskRewardUnitValue;
-    private Short taskMaxMultipleAssignAllow;
 
+    private Short taskRewardUnitValue;
+
+    private Short taskMaxMultipleAssignAllow;
 
     private Short taskReviewDuration;
 
@@ -106,26 +173,14 @@ public class LabacTasks implements Serializable {
 
     private String taskExceptionMessage;
 
-    private Short saleId;
-
     private Short taskPreviewFlag;
 
     private String taskLocName;
-
-    private String taskLocSource;
 
     private String taskLocAddress;
 
     @JsonIgnore
     private Object taskLocGeo;
-
-    public Object getTaskLocGeo() {
-        return taskLocGeo;
-    }
-
-    public void setTaskLocGeo(Object taskLocGeo) {
-        this.taskLocGeo = taskLocGeo;
-    }
 
     @Transient
     private Object taskSdoGtype;
@@ -148,49 +203,377 @@ public class LabacTasks implements Serializable {
     @Transient
     private Object taskSdoElemInfo;
 
+    public Object getTaskSdoGtype() {
+        return taskSdoGtype;
+    }
 
+    public void setTaskSdoGtype(Object taskSdoGtype) {
+        this.taskSdoGtype = taskSdoGtype;
+    }
+
+    public Object getTaskSdosrid() {
+        return taskSdosrid;
+    }
+
+    public void setTaskSdosrid(Object taskSdosrid) {
+        this.taskSdosrid = taskSdosrid;
+    }
+
+    public BigDecimal getTaskSdoPointX() {
+        return taskSdoPointX;
+    }
+
+    public void setTaskSdoPointX(BigDecimal taskSdoPointX) {
+        this.taskSdoPointX = taskSdoPointX;
+    }
+
+    public BigDecimal getTaskSdoPointY() {
+        return taskSdoPointY;
+    }
+
+    public void setTaskSdoPointY(BigDecimal taskSdoPointY) {
+        this.taskSdoPointY = taskSdoPointY;
+    }
+
+    public BigDecimal getTaskSdoPointZ() {
+        return taskSdoPointZ;
+    }
+
+    public void setTaskSdoPointZ(BigDecimal taskSdoPointZ) {
+        this.taskSdoPointZ = taskSdoPointZ;
+    }
+
+    public Object getTaskSdoOrdinates() {
+        return taskSdoOrdinates;
+    }
+
+    public void setTaskSdoOrdinates(Object taskSdoOrdinates) {
+        this.taskSdoOrdinates = taskSdoOrdinates;
+    }
+
+    public Object getTaskSdoElemInfo() {
+        return taskSdoElemInfo;
+    }
+
+    public void setTaskSdoElemInfo(Object taskSdoElemInfo) {
+        this.taskSdoElemInfo = taskSdoElemInfo;
+    }
+
+    private String taskLocSource;
 
     private String taskLocPhone;
 
     private String taskLocRefId;
 
-
     private String taskDatasource;
-
 
     private Short taskDisplayFlag;
 
-
     private Short taskReferrableFlag;
-
 
     private Short taskReferrableRewardValue;
 
     private Short taskReferrableRewardPoint;
 
-
     private String taskReferrableMessage;
 
-
-    private BigDecimal taskOrder;
-
+    private Short taskOrder;
 
     private Short taskRecommendeeRewardValue;
 
-
     private Short taskType;
-
 
     private String taskEngine;
 
-    public Integer getTaskId() {
+    private Short rowId;
+
+    public Integer getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(Integer projectId) {
+        this.projectId = projectId;
+    }
+
+    public String getProjectName() {
+        return projectName;
+    }
+
+    public void setProjectName(String projectName) {
+        this.projectName = projectName == null ? null : projectName.trim();
+    }
+
+    public String getProjectDesc() {
+        return projectDesc;
+    }
+
+    public void setProjectDesc(String projectDesc) {
+        this.projectDesc = projectDesc == null ? null : projectDesc.trim();
+    }
+
+    public Date getProjectCreateTime() {
+        return projectCreateTime;
+    }
+
+    public void setProjectCreateTime(Date projectCreateTime) {
+        this.projectCreateTime = projectCreateTime;
+    }
+
+    public Date getProjectUpdateTime() {
+        return projectUpdateTime;
+    }
+
+    public void setProjectUpdateTime(Date projectUpdateTime) {
+        this.projectUpdateTime = projectUpdateTime;
+    }
+
+    public String getProjectComments() {
+        return projectComments;
+    }
+
+    public void setProjectComments(String projectComments) {
+        this.projectComments = projectComments == null ? null : projectComments.trim();
+    }
+
+    public BigDecimal getProjectOwnerCustomerId() {
+        return projectOwnerCustomerId;
+    }
+
+    public void setProjectOwnerCustomerId(BigDecimal projectOwnerCustomerId) {
+        this.projectOwnerCustomerId = projectOwnerCustomerId;
+    }
+
+    public Long getProjectQuantity() {
+        return projectQuantity;
+    }
+
+    public void setProjectQuantity(Long projectQuantity) {
+        this.projectQuantity = projectQuantity;
+    }
+
+    public BigDecimal getProjectValue() {
+        return projectValue;
+    }
+
+    public void setProjectValue(BigDecimal projectValue) {
+        this.projectValue = projectValue;
+    }
+
+    public Short getProjectType() {
+        return projectType;
+    }
+
+    public void setProjectType(Short projectType) {
+        this.projectType = projectType;
+    }
+
+    public Short getProjectLocationFlag() {
+        return projectLocationFlag;
+    }
+
+    public void setProjectLocationFlag(Short projectLocationFlag) {
+        this.projectLocationFlag = projectLocationFlag;
+    }
+
+    public Short getProjectDisplaySize() {
+        return projectDisplaySize;
+    }
+
+    public void setProjectDisplaySize(Short projectDisplaySize) {
+        this.projectDisplaySize = projectDisplaySize;
+    }
+
+    public BigDecimal getProjectOrder() {
+        return projectOrder;
+    }
+
+    public void setProjectOrder(BigDecimal projectOrder) {
+        this.projectOrder = projectOrder;
+    }
+
+    public String getProjectCategories() {
+        return projectCategories;
+    }
+
+    public void setProjectCategories(String projectCategories) {
+        this.projectCategories = projectCategories == null ? null : projectCategories.trim();
+    }
+
+    public Short getProjectFlag() {
+        return projectFlag;
+    }
+
+    public void setProjectFlag(Short projectFlag) {
+        this.projectFlag = projectFlag;
+    }
+
+    public String getProjectIcon() {
+        return projectIcon;
+    }
+
+    public void setProjectIcon(String projectIcon) {
+        this.projectIcon = projectIcon == null ? null : projectIcon.trim();
+    }
+
+    public Short getProjectStatusIndicator() {
+        return projectStatusIndicator;
+    }
+
+    public void setProjectStatusIndicator(Short projectStatusIndicator) {
+        this.projectStatusIndicator = projectStatusIndicator;
+    }
+
+    public BigDecimal getProjectQuantityTried() {
+        return projectQuantityTried;
+    }
+
+    public void setProjectQuantityTried(BigDecimal projectQuantityTried) {
+        this.projectQuantityTried = projectQuantityTried;
+    }
+
+    public Short getProject3rdPartyReviewFlag() {
+        return project3rdPartyReviewFlag;
+    }
+
+    public void setProject3rdPartyReviewFlag(Short project3rdPartyReviewFlag) {
+        this.project3rdPartyReviewFlag = project3rdPartyReviewFlag;
+    }
+
+    public String getProjectReviewInstruction() {
+        return projectReviewInstruction;
+    }
+
+    public void setProjectReviewInstruction(String projectReviewInstruction) {
+        this.projectReviewInstruction = projectReviewInstruction == null ? null : projectReviewInstruction.trim();
+    }
+
+    public Object getProjectRejectReasons() {
+        return projectRejectReasons;
+    }
+
+    public void setProjectRejectReasons(Object projectRejectReasons) {
+        this.projectRejectReasons = projectRejectReasons;
+    }
+
+    public Object getProjectReworkReasons() {
+        return projectReworkReasons;
+    }
+
+    public void setProjectReworkReasons(Object projectReworkReasons) {
+        this.projectReworkReasons = projectReworkReasons;
+    }
+
+    public Object getProjectPreapproveReasons() {
+        return projectPreapproveReasons;
+    }
+
+    public void setProjectPreapproveReasons(Object projectPreapproveReasons) {
+        this.projectPreapproveReasons = projectPreapproveReasons;
+    }
+
+    public Short getProjectDifficultyLevel() {
+        return projectDifficultyLevel;
+    }
+
+    public void setProjectDifficultyLevel(Short projectDifficultyLevel) {
+        this.projectDifficultyLevel = projectDifficultyLevel;
+    }
+
+    public String getProjectCategories2() {
+        return projectCategories2;
+    }
+
+    public void setProjectCategories2(String projectCategories2) {
+        this.projectCategories2 = projectCategories2 == null ? null : projectCategories2.trim();
+    }
+
+    public Date getProjectPlanEndDate() {
+        return projectPlanEndDate;
+    }
+
+    public void setProjectPlanEndDate(Date projectPlanEndDate) {
+        this.projectPlanEndDate = projectPlanEndDate;
+    }
+
+    public Date getProjectActualEndDate() {
+        return projectActualEndDate;
+    }
+
+    public void setProjectActualEndDate(Date projectActualEndDate) {
+        this.projectActualEndDate = projectActualEndDate;
+    }
+
+    public Short getSaleId() {
+        return saleId;
+    }
+
+    public void setSaleId(Short saleId) {
+        this.saleId = saleId;
+    }
+
+    public String getProjectSubject() {
+        return projectSubject;
+    }
+
+    public void setProjectSubject(String projectSubject) {
+        this.projectSubject = projectSubject == null ? null : projectSubject.trim();
+    }
+
+    public String getProjectDetail() {
+        return projectDetail;
+    }
+
+    public void setProjectDetail(String projectDetail) {
+        this.projectDetail = projectDetail == null ? null : projectDetail.trim();
+    }
+
+    public BigDecimal getProjectMaxValue() {
+        return projectMaxValue;
+    }
+
+    public void setProjectMaxValue(BigDecimal projectMaxValue) {
+        this.projectMaxValue = projectMaxValue;
+    }
+
+    public String getProjectIcon2() {
+        return projectIcon2;
+    }
+
+    public void setProjectIcon2(String projectIcon2) {
+        this.projectIcon2 = projectIcon2 == null ? null : projectIcon2.trim();
+    }
+
+    public Short getProjectCategoryFlag() {
+        return projectCategoryFlag;
+    }
+
+    public void setProjectCategoryFlag(Short projectCategoryFlag) {
+        this.projectCategoryFlag = projectCategoryFlag;
+    }
+
+    public Short getProjectLocationsFlag() {
+        return projectLocationsFlag;
+    }
+
+    public void setProjectLocationsFlag(Short projectLocationsFlag) {
+        this.projectLocationsFlag = projectLocationsFlag;
+    }
+
+    public Short getProjectGroupId() {
+        return projectGroupId;
+    }
+
+    public void setProjectGroupId(Short projectGroupId) {
+        this.projectGroupId = projectGroupId;
+    }
+
+    public BigDecimal getTaskId() {
         return taskId;
     }
 
-    public void setTaskId(Integer taskId) {
+    public void setTaskId(BigDecimal taskId) {
         this.taskId = taskId;
     }
-
 
     public BigDecimal getTaskProjectId() {
         return taskProjectId;
@@ -200,81 +583,65 @@ public class LabacTasks implements Serializable {
         this.taskProjectId = taskProjectId;
     }
 
-
     public Short getTaskLocationFlag() {
         return taskLocationFlag;
     }
-
 
     public void setTaskLocationFlag(Short taskLocationFlag) {
         this.taskLocationFlag = taskLocationFlag;
     }
 
-
     public Integer getTaskCityId() {
         return taskCityId;
     }
-
 
     public void setTaskCityId(Integer taskCityId) {
         this.taskCityId = taskCityId;
     }
 
-
     public Date getTaskBeginTime() {
         return taskBeginTime;
     }
-
 
     public void setTaskBeginTime(Date taskBeginTime) {
         this.taskBeginTime = taskBeginTime;
     }
 
-
     public Date getTaskEndTime() {
         return taskEndTime;
     }
-
 
     public void setTaskEndTime(Date taskEndTime) {
         this.taskEndTime = taskEndTime;
     }
 
-
     public Short getTaskRewardValue() {
         return taskRewardValue;
     }
-
 
     public void setTaskRewardValue(Short taskRewardValue) {
         this.taskRewardValue = taskRewardValue;
     }
 
-
     public Short getTaskQuantity() {
         return taskQuantity;
     }
-
 
     public void setTaskQuantity(Short taskQuantity) {
         this.taskQuantity = taskQuantity;
     }
 
-
     public Short getTaskQuantityUsed() {
         return taskQuantityUsed;
     }
-
 
     public void setTaskQuantityUsed(Short taskQuantityUsed) {
         this.taskQuantityUsed = taskQuantityUsed;
     }
 
-
     public Date getTaskCreateTime() {
         return taskCreateTime;
     }
-
 
     public void setTaskCreateTime(Date taskCreateTime) {
         this.taskCreateTime = taskCreateTime;
@@ -283,7 +650,6 @@ public class LabacTasks implements Serializable {
     public Date getTaskUpdateTime() {
         return taskUpdateTime;
     }
-
 
     public void setTaskUpdateTime(Date taskUpdateTime) {
         this.taskUpdateTime = taskUpdateTime;
@@ -417,16 +783,13 @@ public class LabacTasks implements Serializable {
         this.taskSubmitDuration = taskSubmitDuration;
     }
 
-
     public Short getTaskProvinceId() {
         return taskProvinceId;
     }
 
-
     public void setTaskProvinceId(Short taskProvinceId) {
         this.taskProvinceId = taskProvinceId;
     }
-
 
     public Short getTaskDifficultyLevel() {
         return taskDifficultyLevel;
@@ -436,31 +799,25 @@ public class LabacTasks implements Serializable {
         this.taskDifficultyLevel = taskDifficultyLevel;
     }
 
-
     public Short getTaskRewardType() {
         return taskRewardType;
     }
-
 
     public void setTaskRewardType(Short taskRewardType) {
         this.taskRewardType = taskRewardType;
     }
 
-
     public Short getTaskResponseKeyStep() {
         return taskResponseKeyStep;
     }
-
 
     public void setTaskResponseKeyStep(Short taskResponseKeyStep) {
         this.taskResponseKeyStep = taskResponseKeyStep;
     }
 
-
     public BigDecimal getTaskPrereqTaskId() {
         return taskPrereqTaskId;
     }
-
 
     public void setTaskPrereqTaskId(BigDecimal taskPrereqTaskId) {
         this.taskPrereqTaskId = taskPrereqTaskId;
@@ -470,227 +827,112 @@ public class LabacTasks implements Serializable {
         return taskPostTaskId;
     }
 
-
     public void setTaskPostTaskId(BigDecimal taskPostTaskId) {
         this.taskPostTaskId = taskPostTaskId;
     }
-
 
     public Short getTaskRewardPayableFlag() {
         return taskRewardPayableFlag;
     }
 
-
     public void setTaskRewardPayableFlag(Short taskRewardPayableFlag) {
         this.taskRewardPayableFlag = taskRewardPayableFlag;
     }
-
 
     public Short getTaskRuleFlag() {
         return taskRuleFlag;
     }
 
-
     public void setTaskRuleFlag(Short taskRuleFlag) {
         this.taskRuleFlag = taskRuleFlag;
     }
-
 
     public Short getTaskRewardUnitValue() {
         return taskRewardUnitValue;
     }
 
-
     public void setTaskRewardUnitValue(Short taskRewardUnitValue) {
         this.taskRewardUnitValue = taskRewardUnitValue;
     }
-
 
     public Short getTaskMaxMultipleAssignAllow() {
         return taskMaxMultipleAssignAllow;
     }
 
-
     public void setTaskMaxMultipleAssignAllow(Short taskMaxMultipleAssignAllow) {
         this.taskMaxMultipleAssignAllow = taskMaxMultipleAssignAllow;
     }
-
 
     public Short getTaskReviewDuration() {
         return taskReviewDuration;
     }
 
-
     public void setTaskReviewDuration(Short taskReviewDuration) {
         this.taskReviewDuration = taskReviewDuration;
     }
-
 
     public Short getTaskReviewFlag() {
         return taskReviewFlag;
     }
 
-
     public void setTaskReviewFlag(Short taskReviewFlag) {
         this.taskReviewFlag = taskReviewFlag;
     }
-
 
     public Short getTaskSupportDeviceType() {
         return taskSupportDeviceType;
     }
 
-
     public void setTaskSupportDeviceType(Short taskSupportDeviceType) {
         this.taskSupportDeviceType = taskSupportDeviceType;
     }
-
 
     public String getTaskDefinition() {
         return taskDefinition;
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method sets the value of the database column LABAC_TASKS.TASK_DEFINITION
-     *
-     * @param taskDefinition the value for LABAC_TASKS.TASK_DEFINITION
-     * @mbggenerated
-     */
     public void setTaskDefinition(String taskDefinition) {
         this.taskDefinition = taskDefinition == null ? null : taskDefinition.trim();
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method returns the value of the database column LABAC_TASKS.TASK_AUTO_APPROVE_FLAG
-     *
-     * @return the value of LABAC_TASKS.TASK_AUTO_APPROVE_FLAG
-     * @mbggenerated
-     */
     public Short getTaskAutoApproveFlag() {
         return taskAutoApproveFlag;
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method sets the value of the database column LABAC_TASKS.TASK_AUTO_APPROVE_FLAG
-     *
-     * @param taskAutoApproveFlag the value for LABAC_TASKS.TASK_AUTO_APPROVE_FLAG
-     * @mbggenerated
-     */
     public void setTaskAutoApproveFlag(Short taskAutoApproveFlag) {
         this.taskAutoApproveFlag = taskAutoApproveFlag;
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method returns the value of the database column LABAC_TASKS.TASK_MULTIPLE_SUBMISSION_ALLOW
-     *
-     * @return the value of LABAC_TASKS.TASK_MULTIPLE_SUBMISSION_ALLOW
-     * @mbggenerated
-     */
     public Short getTaskMultipleSubmissionAllow() {
         return taskMultipleSubmissionAllow;
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method sets the value of the database column LABAC_TASKS.TASK_MULTIPLE_SUBMISSION_ALLOW
-     *
-     * @param taskMultipleSubmissionAllow the value for LABAC_TASKS.TASK_MULTIPLE_SUBMISSION_ALLOW
-     * @mbggenerated
-     */
     public void setTaskMultipleSubmissionAllow(Short taskMultipleSubmissionAllow) {
         this.taskMultipleSubmissionAllow = taskMultipleSubmissionAllow;
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method returns the value of the database column LABAC_TASKS.TASK_REFER_DETAIL
-     *
-     * @return the value of LABAC_TASKS.TASK_REFER_DETAIL
-     * @mbggenerated
-     */
     public String getTaskReferDetail() {
         return taskReferDetail;
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method sets the value of the database column LABAC_TASKS.TASK_REFER_DETAIL
-     *
-     * @param taskReferDetail the value for LABAC_TASKS.TASK_REFER_DETAIL
-     * @mbggenerated
-     */
     public void setTaskReferDetail(String taskReferDetail) {
         this.taskReferDetail = taskReferDetail == null ? null : taskReferDetail.trim();
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method returns the value of the database column LABAC_TASKS.TASK_EXCEPTION_DETAIL_ID
-     *
-     * @return the value of LABAC_TASKS.TASK_EXCEPTION_DETAIL_ID
-     * @mbggenerated
-     */
     public BigDecimal getTaskExceptionDetailId() {
         return taskExceptionDetailId;
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method sets the value of the database column LABAC_TASKS.TASK_EXCEPTION_DETAIL_ID
-     *
-     * @param taskExceptionDetailId the value for LABAC_TASKS.TASK_EXCEPTION_DETAIL_ID
-     * @mbggenerated
-     */
     public void setTaskExceptionDetailId(BigDecimal taskExceptionDetailId) {
         this.taskExceptionDetailId = taskExceptionDetailId;
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method returns the value of the database column LABAC_TASKS.TASK_EXCEPTION_MESSAGE
-     *
-     * @return the value of LABAC_TASKS.TASK_EXCEPTION_MESSAGE
-     * @mbggenerated
-     */
     public String getTaskExceptionMessage() {
         return taskExceptionMessage;
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method sets the value of the database column LABAC_TASKS.TASK_EXCEPTION_MESSAGE
-     *
-     * @param taskExceptionMessage the value for LABAC_TASKS.TASK_EXCEPTION_MESSAGE
-     * @mbggenerated
-     */
     public void setTaskExceptionMessage(String taskExceptionMessage) {
         this.taskExceptionMessage = taskExceptionMessage == null ? null : taskExceptionMessage.trim();
-    }
-
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method returns the value of the database column LABAC_TASKS.SALE_ID
-     *
-     * @return the value of LABAC_TASKS.SALE_ID
-     * @mbggenerated
-     */
-    public Short getSaleId() {
-        return saleId;
-    }
-
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method sets the value of the database column LABAC_TASKS.SALE_ID
-     *
-     * @param saleId the value for LABAC_TASKS.SALE_ID
-     * @mbggenerated
-     */
-    public void setSaleId(Short saleId) {
-        this.saleId = saleId;
     }
 
     public Short getTaskPreviewFlag() {
@@ -700,43 +942,30 @@ public class LabacTasks implements Serializable {
     public void setTaskPreviewFlag(Short taskPreviewFlag) {
         this.taskPreviewFlag = taskPreviewFlag;
     }
+
     public String getTaskLocName() {
         return taskLocName;
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method sets the value of the database column LABAC_TASKS.TASK_LOC_NAME
-     *
-     * @param taskLocName the value for LABAC_TASKS.TASK_LOC_NAME
-     * @mbggenerated
-     */
     public void setTaskLocName(String taskLocName) {
         this.taskLocName = taskLocName == null ? null : taskLocName.trim();
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method returns the value of the database column LABAC_TASKS.TASK_LOC_ADDRESS
-     *
-     * @return the value of LABAC_TASKS.TASK_LOC_ADDRESS
-     * @mbggenerated
-     */
     public String getTaskLocAddress() {
         return taskLocAddress;
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method sets the value of the database column LABAC_TASKS.TASK_LOC_ADDRESS
-     *
-     * @param taskLocAddress the value for LABAC_TASKS.TASK_LOC_ADDRESS
-     * @mbggenerated
-     */
     public void setTaskLocAddress(String taskLocAddress) {
         this.taskLocAddress = taskLocAddress == null ? null : taskLocAddress.trim();
     }
 
+    public Object getTaskLocGeo() {
+        return taskLocGeo;
+    }
+
+    public void setTaskLocGeo(Object taskLocGeo) {
+        this.taskLocGeo = taskLocGeo;
+    }
 
     public String getTaskLocSource() {
         return taskLocSource;
@@ -746,44 +975,21 @@ public class LabacTasks implements Serializable {
         this.taskLocSource = taskLocSource == null ? null : taskLocSource.trim();
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method returns the value of the database column LABAC_TASKS.TASK_LOC_PHONE
-     *
-     * @return the value of LABAC_TASKS.TASK_LOC_PHONE
-     * @mbggenerated
-     */
     public String getTaskLocPhone() {
         return taskLocPhone;
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method sets the value of the database column LABAC_TASKS.TASK_LOC_PHONE
-     *
-     * @param taskLocPhone the value for LABAC_TASKS.TASK_LOC_PHONE
-     * @mbggenerated
-     */
     public void setTaskLocPhone(String taskLocPhone) {
         this.taskLocPhone = taskLocPhone == null ? null : taskLocPhone.trim();
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method returns the value of the database column LABAC_TASKS.TASK_LOC_REF_ID
-     *
-     * @return the value of LABAC_TASKS.TASK_LOC_REF_ID
-     * @mbggenerated
-     */
     public String getTaskLocRefId() {
         return taskLocRefId;
     }
 
-
     public void setTaskLocRefId(String taskLocRefId) {
         this.taskLocRefId = taskLocRefId == null ? null : taskLocRefId.trim();
     }
-
 
     public String getTaskDatasource() {
         return taskDatasource;
@@ -797,27 +1003,17 @@ public class LabacTasks implements Serializable {
         return taskDisplayFlag;
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method sets the value of the database column LABAC_TASKS.TASK_DISPLAY_FLAG
-     *
-     * @param taskDisplayFlag the value for LABAC_TASKS.TASK_DISPLAY_FLAG
-     * @mbggenerated
-     */
     public void setTaskDisplayFlag(Short taskDisplayFlag) {
         this.taskDisplayFlag = taskDisplayFlag;
     }
-
 
     public Short getTaskReferrableFlag() {
         return taskReferrableFlag;
     }
 
-
     public void setTaskReferrableFlag(Short taskReferrableFlag) {
         this.taskReferrableFlag = taskReferrableFlag;
     }
-
 
     public Short getTaskReferrableRewardValue() {
         return taskReferrableRewardValue;
@@ -827,16 +1023,13 @@ public class LabacTasks implements Serializable {
         this.taskReferrableRewardValue = taskReferrableRewardValue;
     }
 
-
     public Short getTaskReferrableRewardPoint() {
         return taskReferrableRewardPoint;
     }
 
-
     public void setTaskReferrableRewardPoint(Short taskReferrableRewardPoint) {
         this.taskReferrableRewardPoint = taskReferrableRewardPoint;
     }
-
 
     public String getTaskReferrableMessage() {
         return taskReferrableMessage;
@@ -846,116 +1039,43 @@ public class LabacTasks implements Serializable {
         this.taskReferrableMessage = taskReferrableMessage == null ? null : taskReferrableMessage.trim();
     }
 
-    public BigDecimal getTaskOrder() {
+    public Short getTaskOrder() {
         return taskOrder;
     }
 
-    public void setTaskOrder(BigDecimal taskOrder) {
+    public void setTaskOrder(Short taskOrder) {
         this.taskOrder = taskOrder;
     }
-
 
     public Short getTaskRecommendeeRewardValue() {
         return taskRecommendeeRewardValue;
     }
 
-
     public void setTaskRecommendeeRewardValue(Short taskRecommendeeRewardValue) {
         this.taskRecommendeeRewardValue = taskRecommendeeRewardValue;
     }
-
 
     public Short getTaskType() {
         return taskType;
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method sets the value of the database column LABAC_TASKS.TASK_TYPE
-     *
-     * @param taskType the value for LABAC_TASKS.TASK_TYPE
-     * @mbggenerated
-     */
     public void setTaskType(Short taskType) {
         this.taskType = taskType;
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method returns the value of the database column LABAC_TASKS.TASK_ENGINE
-     *
-     * @return the value of LABAC_TASKS.TASK_ENGINE
-     * @mbggenerated
-     */
     public String getTaskEngine() {
         return taskEngine;
     }
 
-    /**
-     * This method was generated by MyBatis Generator.
-     * This method sets the value of the database column LABAC_TASKS.TASK_ENGINE
-     *
-     * @param taskEngine the value for LABAC_TASKS.TASK_ENGINE
-     * @mbggenerated
-     */
     public void setTaskEngine(String taskEngine) {
         this.taskEngine = taskEngine == null ? null : taskEngine.trim();
     }
 
-
-    public Object getTaskSdoGtype() {
-        return taskSdoGtype;
+    public Short getRowId() {
+        return rowId;
     }
 
-    public void setTaskSdoGtype(Object taskSdoGtype) {
-        this.taskSdoGtype = taskSdoGtype;
-    }
-
-    public Object getTaskSdosrid() {
-        return taskSdosrid;
-    }
-
-    public void setTaskSdosrid(Object taskSdosrid) {
-        this.taskSdosrid = taskSdosrid;
-    }
-
-    public BigDecimal getTaskSdoPointX() {
-        return taskSdoPointX;
-    }
-
-    public void setTaskSdoPointX(BigDecimal taskSdoPointX) {
-        this.taskSdoPointX = taskSdoPointX;
-    }
-
-    public BigDecimal getTaskSdoPointY() {
-        return taskSdoPointY;
-    }
-
-    public void setTaskSdoPointY(BigDecimal taskSdoPointY) {
-        this.taskSdoPointY = taskSdoPointY;
-    }
-
-    public BigDecimal getTaskSdoPointZ() {
-        return taskSdoPointZ;
-    }
-
-    public void setTaskSdoPointZ(BigDecimal taskSdoPointZ) {
-        this.taskSdoPointZ = taskSdoPointZ;
-    }
-
-    public Object getTaskSdoOrdinates() {
-        return taskSdoOrdinates;
-    }
-
-    public void setTaskSdoOrdinates(Object taskSdoOrdinates) {
-        this.taskSdoOrdinates = taskSdoOrdinates;
-    }
-
-    public Object getTaskSdoElemInfo() {
-        return taskSdoElemInfo;
-    }
-
-    public void setTaskSdoElemInfo(Object taskSdoElemInfo) {
-        this.taskSdoElemInfo = taskSdoElemInfo;
+    public void setRowId(Short rowId) {
+        this.rowId = rowId;
     }
 }

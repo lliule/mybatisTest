@@ -10,4 +10,5 @@ public interface LabacTasksMapper extends BaseMapper<LabacTasks,Integer> {
 
     Integer insertOne(LabacTasks labacTasks);
 
+//    LabacTasks selectTasksByProjectId();
 }

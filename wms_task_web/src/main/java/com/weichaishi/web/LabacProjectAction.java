@@ -1,6 +1,7 @@
 package com.weichaishi.web;
 
 import com.weichaishi.model.LabacProjects;
+import com.weichaishi.model.ProjectsTasksView;
 import com.weichaishi.result.PageResult;
 import com.weichaishi.service.LabacProjectsService;
 import com.weichaishi.utils.JsonResponseResult;
@@ -9,7 +10,6 @@ import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import tk.mybatis.mapper.util.StringUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -135,5 +135,57 @@ public class LabacProjectAction {
             jsonResponseResult.setErrorMsg(SysConstent.DELETEERR);
         }
         return jsonResponseResult;
+    }
+
+    /**
+     * 多表查询示例接口
+     * @param pageNum
+     * @param pageSize
+     * @return
+     */
+    @RequestMapping(value = "/task",method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectProject(@RequestParam(value = "pageNum" , defaultValue = "1")Integer pageNum,
+                                @RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize){
+        JsonResponseResult<PageResult> result = new JsonResponseResult<PageResult>();
+        PageResult pageResult = labacProjectsService.selectProjectAndTasks(pageNum, pageSize);
+        result.setData(pageResult);
+        return result;
+    }
+
+    /**
+     * 存储构成示例接口
+     * @param projectId
+     * @return
+     */
+    @RequestMapping(value = "/demo/{projectId}",method = RequestMethod.GET)
+    @ResponseBody
+    public  Object selectDemo(@PathVariable("projectId") Integer projectId){
+        JsonResponseResult<Object> result = new JsonResponseResult<Object>();
+        Object id = labacProjectsService.selectDemo(projectId);
+        result.setData(id);
+        return result;
+    }
+
+    /**
+     * 视图的示例接口
+     * @return
+     */
+    @RequestMapping(value = "/view",method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectView(){
+        JsonResponseResult<List<ProjectsTasksView>> result = new JsonResponseResult<List<ProjectsTasksView>>();
+        List<ProjectsTasksView> list = labacProjectsService.selectView();
+        result.setData(list);
+        return result;
+    }
+
+    @RequestMapping(value = "/views",method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectViewByProjectId(ProjectsTasksView projectsTasksView){
+        JsonResponseResult<List<ProjectsTasksView>> result = new JsonResponseResult<List<ProjectsTasksView>>();
+        List<ProjectsTasksView> list = labacProjectsService.selectViewByProjectId(projectsTasksView);
+        result.setData(list);
+        return result;
     }
 }

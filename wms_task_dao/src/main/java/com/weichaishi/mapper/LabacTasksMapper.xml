@@ -146,5 +146,26 @@
         #{taskEngine,jdbcType=VARCHAR}
         )
     </insert>
-   <!-- #{taskLocGeo},-->
+
+
+
+  <!--   <select id="selectTasksByProjectId" resultMap="getPorject">
+        select
+        <include refid="taskColumn" />,lp.project_id,lp.project_name
+        from labac_tasks left join labac_projects lp on task_project_id = lp.project_id
+    </select>
+
+    <resultMap id="getProject" type="LabacProject" autoMapping="true">
+        <id property="taskId" column="task_id" />
+        &lt;!&ndash;<association property="project" javaType="LabacProject">
+            <id column="project_id" property="projectId" />
+        </association>&ndash;&gt;
+        <collection property="projects"
+    </resultMap>
+-->
+
+
+
+
+
 </mapper>

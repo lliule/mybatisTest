@@ -146,7 +146,7 @@ public class LabacTasksService extends BaseService<LabacTasks,Integer> {
                         labacTasks.setTaskSdoPointX((BigDecimal)attributes[0]);
                         labacTasks.setTaskSdoPointY((BigDecimal)attributes[1]);
                         labacTasks.setTaskSdoPointZ((BigDecimal)attributes[2]);
-                        }
+                    }
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -165,6 +165,7 @@ public class LabacTasksService extends BaseService<LabacTasks,Integer> {
             }
         }
     }
+
 
 
 }

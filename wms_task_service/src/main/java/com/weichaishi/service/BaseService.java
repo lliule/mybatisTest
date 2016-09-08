@@ -4,10 +4,14 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.weichaishi.dao.BaseMapper;
 import com.weichaishi.model.LabacTasks;
+import com.weichaishi.model.ProjectsTasksView;
 import com.weichaishi.result.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.sql.SQLException;
+import java.sql.Struct;
 import java.util.List;
 
 /**
@@ -164,6 +168,8 @@ public abstract class BaseService<T,ID extends Serializable> {
     };
 
 
+
+
   /*  private T model;
 
     public BaseService() {
@@ -176,5 +182,6 @@ public abstract class BaseService<T,ID extends Serializable> {
         System.out.println("getRawType==" + type.getRawType());
         model = type1.
     }*/
+
 
 }

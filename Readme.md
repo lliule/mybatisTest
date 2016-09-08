@@ -46,7 +46,12 @@ taskSdoElemInfo: null
 而不在有taskLocGeo字段
 
 *******************
-TODO：
-1、写Advanced Rest Client的使用文档
-2、写mybatis反转表生成实体的文档
 
+本项目中的project.xml中，有一个调用存储过程的简单示例。
+TODO：
+多表查询（projects 和 tasks 表的联查）
+视图，使用视图来实现多表联查.
+
+
+************************************
+优化：将处理task的taskLocGeo字段代码提取出来
