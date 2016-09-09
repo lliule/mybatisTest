@@ -154,7 +154,7 @@ public class LabacProjectAction {
     }
 
     /**
-     * 存储构成示例接口
+     * 存储过程示例接口
      * @param projectId
      * @return
      */
@@ -180,6 +180,12 @@ public class LabacProjectAction {
         return result;
     }
 
+    /**
+     * 视图示例接口
+     * 使用实体类映射视图结果
+     * @param projectsTasksView
+     * @return
+     */
     @RequestMapping(value = "/views",method = RequestMethod.GET)
     @ResponseBody
     public Object selectViewByProjectId(ProjectsTasksView projectsTasksView){

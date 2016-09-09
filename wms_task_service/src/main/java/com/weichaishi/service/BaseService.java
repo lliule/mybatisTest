@@ -184,5 +184,4 @@ public abstract class BaseService<T,ID extends Serializable> {
         model = type1.
     }*/
 
-
 }
