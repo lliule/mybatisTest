@@ -188,4 +188,46 @@ public class LabacProjectAction {
         result.setData(list);
         return result;
     }
+
+    /**
+     * 封装查询视图结果到map集合测试接口
+     * @return
+     */
+    @RequestMapping(value = "/view/part",method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectViewPart(){
+        JsonResponseResult<List<Map<String, Object>>> result = new JsonResponseResult<List<Map<String, Object>>>();
+        List<Map<String, Object>> maps = labacProjectsService.selectViewPort();
+        result.setData(maps);
+        return result;
+    }
+
+    /**
+     * 封装查询表结果到map集合测试接口
+     * @param projectId
+     * @return
+     */
+    @RequestMapping(value = "/map",method = RequestMethod.GET)
+    @ResponseBody
+    public Object selectMap(@RequestParam("projectId")Integer projectId){
+        JsonResponseResult<List<Map<String, Object>>> result = new JsonResponseResult<List<Map<String, Object>>>();
+        List<Map<String,Object>> map = labacProjectsService.selectMap(projectId);
+        result.setData(map);
+        return result;
+    }
+
+    /**
+     * 使用存储过程
+     * 根据主键查询projectName和projectDesc
+     * @param projectId
+     * @return
+     */
+    @RequestMapping(value="/map/{projectId}")
+    @ResponseBody
+    public Object selectProjectNameAndDescById(@PathVariable("projectId")Integer projectId){
+        JsonResponseResult<Map<String, Object>> result = new JsonResponseResult<Map<String, Object>>();
+        Map<String, Object> map = labacProjectsService.selectProjectNameAndDescById(projectId);
+        result.setData(map);
+        return result;
+    }
 }

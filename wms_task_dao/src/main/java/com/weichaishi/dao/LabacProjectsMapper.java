@@ -18,4 +18,10 @@ public interface LabacProjectsMapper extends BaseMapper<LabacProjects,Integer> {
     List<LabacProjects> selectProjectAndTasks();
 
     List<ProjectsTasksView> selectView();
+
+    List<Map<String,Object>> selectViewPart();
+
+    List<Map<String,Object>> selectMap(Integer projectId);
+
+    void selectProjectNameAndDescById(Map<String, Object> map);
 }

@@ -247,6 +247,14 @@
       <![CDATA[call wcs_s.project(?,?)]]>
    </select>
 
+  <!-- 在调用存储过程的时候，需要将statementType调整成CALLABLE,这表示mybatis使用CallableStatement，
+      当然，默认是PREPARED，表示选择PreparedStatement
+   -->
+   <select id="selectProjectNameAndDescById" statementType="CALLABLE" parameterType="java.util.Map">
+      <![CDATA[call wcs_s.selectProjectById(#{projectId,mode=IN,jdbcType=DECIMAL},
+                                            #{projectDesc,mode=OUT,jdbcType=VARCHAR},
+                                            #{projectName,mode=OUT,jdbcType=VARCHAR})]]>
+   </select>
 
    <!-- 多表查询示例 -->
    <select id="selectProjectAndTasks" resultMap="getTasks">
@@ -341,4 +349,14 @@
       ROW_ID
    </sql>
 
+
+   <!-- 查询视图的部分字段 -->
+   <select id="selectViewPart" resultType="java.util.Map">
+      select project_id projectId,task_id taskId  from wcs_s.getProjectAndTasks
+   </select>
+
+<!-- 将结果封装成map集合 -->
+   <select id="selectMap" resultType="java.util.Map" parameterType="int">
+      select project_id projectId,project_desc projectDesc from labac_projects where project_id=#{projectId}
+   </select>
 </mapper>

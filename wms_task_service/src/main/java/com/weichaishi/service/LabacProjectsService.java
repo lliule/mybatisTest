@@ -136,5 +136,34 @@ public class LabacProjectsService extends BaseService<LabacProjects,Integer> {
         List<ProjectsTasksView> list = projectsTasksViewMapper.select(projectsTasksView);
         doTaskLocGeoForList(list);
         return  list;
-    };
+    }
+
+    /**
+     * 查询视图的部分字段
+     * @return
+     */
+    public List<Map<String,Object>> selectViewPort(){
+        return labacProjectsMapper.selectViewPart();
+    }
+
+    /**
+     *使用map封装查询的表的部份字段
+     * @param projectId
+     * @return
+     */
+    public List<Map<String,Object>> selectMap(Integer projectId){
+        return labacProjectsMapper.selectMap(projectId);
+    }
+
+    /**
+     * 调用存储过程，根据projectId查询projectDesc和projectName
+     * @param projectId
+     * @return
+     */
+    public Map<String,Object> selectProjectNameAndDescById(Integer projectId){
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("projectId",projectId);
+        labacProjectsMapper.selectProjectNameAndDescById(map);
+        return map;
+    }
 }
