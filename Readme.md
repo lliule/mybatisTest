@@ -12,8 +12,22 @@ labac_projects表操作的api 接口
 
 /projects  +Put   update: 更新一条数据
 
-
 /projects/{key}   +DELETE     deleteByPrimaryKey：根据之间删除一条数据
+
+/projects/task  +GET selectProject:多表查询示例接口（projects和tasks表）
+
+/projects/demo/{projectId}  +Get  selectDemo:存储过程示例接口（输入id，输出id）
+
+/projects/view  +Get selectView:视图示例接口（返回视图结果）
+
+/projects/views  +Get  selectViewByProjectId：使用实体类映射视图结果
+
+/projects/view/part  +get  selectViewPart:将视图结果封装map集合测试接口
+
+/projects/map  +get  selectMap :将表结果封装map集合测试接口
+
+/projects//map/{projectId} +get  selectProjectNameAndDescById：存储过程示例接口，
+根据主键projectId查询ProjectName和projectDesc
 
 
 labac_tasks表操作API接口说明：
