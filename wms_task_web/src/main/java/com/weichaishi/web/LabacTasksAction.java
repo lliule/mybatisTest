@@ -134,23 +134,4 @@ public class LabacTasksAction {
         return result;
     }
 
-    /**
-     * 条件分页查询
-     * TODO  SERVICE 组装条件
-     */
-    /*@RequestMapping(value = "/list/page",method = RequestMethod.GET)
-    @ResponseBody
-    public Object queryListByPage(@RequestParam(value = "pageNum",defaultValue = "1")Integer pageNum,
-                                  @RequestParam(value = "pageSize",defaultValue = "10")Integer pageSize){
-        JsonResponseResult<PageResult> jsonResponseResult = new JsonResponseResult<PageResult>();
-        try {
-            PageResult page = labacTasksService.queryListByPage(pageNum, pageSize);
-            jsonResponseResult.setData(page);
-            return jsonResponseResult;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return  null;
-    }*/
-
 }

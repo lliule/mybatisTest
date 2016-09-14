@@ -68,4 +68,12 @@ TODO：
 
 
 ************************************
-优化：将处理task的taskLocGeo字段代码提取出来
+Q：为什么实体类实现Serializable之后，使用数据库缓存就报错
+org.apache.ibatis.cache.CacheException: Error serializing object.
+ Cause: java.io.NotSerializableException: oracle.jdbc.driver.T4CConnection
+
+ 1、关于自定义批量插入的实现
+ 2、rabbitMq 的通讯demo
+ 3、多线程开发rabbitMq
+ MI：
+ 4、批量插入，接受的对象是json格式的数据

@@ -243,14 +243,14 @@
    <!-- 调用存储过程示例
          接受一个project_id ，返回该id
    -->
-   <select id="selectDemo" statementType="CALLABLE" parameterMap="param">
+   <select id="selectDemo" statementType="CALLABLE" parameterMap="param" useCache="false">
       <![CDATA[call wcs_s.project(?,?)]]>
    </select>
 
   <!-- 在调用存储过程的时候，需要将statementType调整成CALLABLE,这表示mybatis使用CallableStatement，
       当然，默认是PREPARED，表示选择PreparedStatement
    -->
-   <select id="selectProjectNameAndDescById" statementType="CALLABLE" parameterType="java.util.Map">
+   <select id="selectProjectNameAndDescById" statementType="CALLABLE" parameterType="java.util.Map" useCache="false">
       <![CDATA[call wcs_s.selectProjectById(#{projectId,mode=IN,jdbcType=DECIMAL},
                                             #{projectDesc,mode=OUT,jdbcType=VARCHAR},
                                             #{projectName,mode=OUT,jdbcType=VARCHAR})]]>
@@ -358,5 +358,9 @@
 <!-- 将结果封装成map集合 -->
    <select id="selectMap" resultType="java.util.Map" parameterType="int">
       select project_id projectId,project_desc projectDesc from labac_projects where project_id=#{projectId}
+   </select>
+
+   <select id="selectId" resultType="java.util.Map" useCache="false" fetchSize="1">
+       select WCS_P.LABAC_TASK_SEQ.nextval as id from dual
    </select>
 </mapper>

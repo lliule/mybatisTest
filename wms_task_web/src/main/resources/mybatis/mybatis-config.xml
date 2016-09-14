@@ -7,9 +7,9 @@
 		<!--开启驼峰匹配-->
 		<setting name="mapUnderscoreToCamelCase" value="true" />
 		<setting name="logPrefix" value="lly"/>
-		<!--<setting name="lazyLoadingEnabled" value="true"/>
-		<setting name="aggressiveLazyLoading" value="false"/>-->
-
+		<setting name="lazyLoadingEnabled" value="true"/>
+		<setting name="aggressiveLazyLoading" value="false"/>
+		<setting name="cacheEnabled" value="false"/>
 	</settings>
 
 	<typeAliases>

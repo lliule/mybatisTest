@@ -3,6 +3,7 @@ package com.weichaishi.dao;
 import com.weichaishi.model.LabacProjects;
 import com.weichaishi.model.ProjectsTasksView;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -24,4 +25,8 @@ public interface LabacProjectsMapper extends BaseMapper<LabacProjects,Integer> {
     List<Map<String,Object>> selectMap(Integer projectId);
 
     void selectProjectNameAndDescById(Map<String, Object> map);
+
+    Map<String,BigDecimal> selectId();
+
+//    Integer insertMore(List<LabacProjects> list);
 }

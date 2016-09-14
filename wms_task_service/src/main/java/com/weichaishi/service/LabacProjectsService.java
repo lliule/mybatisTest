@@ -7,16 +7,15 @@ import com.weichaishi.dao.ProjectsTasksViewMapper;
 import com.weichaishi.model.LabacProjects;
 import com.weichaishi.model.ProjectsTasksView;
 import com.weichaishi.result.PageResult;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.sql.Struct;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @Service
 public class LabacProjectsService extends BaseService<LabacProjects,Integer> {
@@ -26,6 +25,9 @@ public class LabacProjectsService extends BaseService<LabacProjects,Integer> {
 
     @Autowired
     private ProjectsTasksViewMapper projectsTasksViewMapper;
+
+    @Autowired
+    private SqlSessionFactory sqlSessionFactory;
 
     @Override
     public Integer updateBySelective(LabacProjects entity) {
@@ -58,36 +60,10 @@ public class LabacProjectsService extends BaseService<LabacProjects,Integer> {
         return result;
     }
 
-    /**
-     * ´æ´¢¹ı³Ì¼òµ¥Ê¾Àı
-     * map£º Ìõ¼şÊÇprojectId  mapµÄkey ±ØĞëÒªºÍxmlÖĞµÄpropertyÖµÒ»Ñù
-     *
-     * µ÷ÓÃÍê´æ´¢¹ı³Ìºó£¬mapÖĞ¾Í»á´æÔÚxmlÖĞ¶¨ÒåºÃµÄÒÔproperty µÄÖµÎª£Ë£å£ù£¬´æ´¢¹ı³Ì·µ»ØµÄÖµÎªvalueµÄmap£»
-     * @param projectId
-     * @return
-     */
-    public Object selectDemo(Integer projectId){
-        Map<String,Object> map = new HashMap<String, Object>();
-        map.put("projectId",projectId);
-        labacProjectsMapper.selectDemo(map);
-        Object id = map.get("id");
-        return  id;
-    }
-
 
     /**
-     * ÊÓÍ¼µÄ¼òµ¥Ê¾Àı
-     * @return
-     */
-    public List<ProjectsTasksView> selectView(){
-        List<ProjectsTasksView> list = labacProjectsMapper.selectView();
-        doTaskLocGeoForList(list);
-        return list;
-    }
-
-    /**
-     * ´¦Àí taskLocGeo ×Ö¶Î
-     *½â¾ö ¸Ã×Ö¶Î²»ÄÜ±»json»¯¡£ ½«¸Ã×Ö¶Î²ğ·ÖÎª¶à¸ö×Ö¶Î
+     * å¤„ç† taskLocGeo å­—æ®µ
+     *è§£å†³ è¯¥å­—æ®µä¸èƒ½è¢«jsonåŒ–ã€‚ å°†è¯¥å­—æ®µæ‹†åˆ†ä¸ºå¤šä¸ªå­—æ®µ
      * @param projectsTasksView
      */
     private void doTaskLocGeo(ProjectsTasksView projectsTasksView){
@@ -116,7 +92,7 @@ public class LabacProjectsService extends BaseService<LabacProjects,Integer> {
     }
 
     /**
-     * ÅúÁ¿´¦ÀítaskLocGeo×Ö¶Î
+     * æ‰¹é‡å¤„ç†taskLocGeoå­—æ®µ
      * @param list
      */
     private void doTaskLocGeoForList(List<ProjectsTasksView> list){
@@ -127,8 +103,42 @@ public class LabacProjectsService extends BaseService<LabacProjects,Integer> {
         }
     }
 
+
     /**
-     * ²éÑ¯ÊÓÍ¼
+     * æµ‹è¯• mybatis å’Œæ•°æ®åº“çš„å­˜å‚¨è¿‡ç¨‹ã€è§†å›¾å’Œmybatisçš„å¤šè¡¨æ“ä½œ
+     */
+
+
+
+    /**
+     * å­˜å‚¨è¿‡ç¨‹ç®€å•ç¤ºä¾‹
+     * mapï¼š æ¡ä»¶æ˜¯projectId  mapçš„key å¿…é¡»è¦å’Œxmlä¸­çš„propertyå€¼ä¸€æ ·
+     *
+     * è°ƒç”¨å®Œå­˜å‚¨è¿‡ç¨‹åï¼Œmapä¸­å°±ä¼šå­˜åœ¨xmlä¸­å®šä¹‰å¥½çš„ä»¥property çš„å€¼ä¸ºï¼«ï½…ï½™ï¼Œå­˜å‚¨è¿‡ç¨‹è¿”å›çš„å€¼ä¸ºvalueçš„mapï¼›
+     * @param projectId
+     * @return
+     */
+    public Object selectDemo(Integer projectId){
+        Map<String,Object> map = new HashMap<String, Object>();
+        map.put("projectId",projectId);
+        labacProjectsMapper.selectDemo(map);
+        Object id = map.get("id");
+        return  id;
+    }
+
+
+    /**
+     * è§†å›¾çš„ç®€å•ç¤ºä¾‹
+     * @return
+     */
+    public List<ProjectsTasksView> selectView(){
+        List<ProjectsTasksView> list = labacProjectsMapper.selectView();
+        doTaskLocGeoForList(list);
+        return list;
+    }
+
+    /**
+     * æŸ¥è¯¢è§†å›¾
      * @param projectsTasksView
      * @return
      */
@@ -139,7 +149,7 @@ public class LabacProjectsService extends BaseService<LabacProjects,Integer> {
     }
 
     /**
-     * ²éÑ¯ÊÓÍ¼µÄ²¿·Ö×Ö¶Î
+     * æŸ¥è¯¢è§†å›¾çš„éƒ¨åˆ†å­—æ®µ
      * @return
      */
     public List<Map<String,Object>> selectViewPort(){
@@ -147,7 +157,7 @@ public class LabacProjectsService extends BaseService<LabacProjects,Integer> {
     }
 
     /**
-     *Ê¹ÓÃmap·â×°²éÑ¯µÄ±íµÄ²¿·İ×Ö¶Î
+     *ä½¿ç”¨mapå°è£…æŸ¥è¯¢çš„è¡¨çš„éƒ¨ä»½å­—æ®µ
      * @param projectId
      * @return
      */
@@ -156,7 +166,7 @@ public class LabacProjectsService extends BaseService<LabacProjects,Integer> {
     }
 
     /**
-     * µ÷ÓÃ´æ´¢¹ı³Ì£¬¸ù¾İprojectId²éÑ¯projectDescºÍprojectName
+     * è°ƒç”¨å­˜å‚¨è¿‡ç¨‹ï¼Œæ ¹æ®projectIdæŸ¥è¯¢projectDescå’ŒprojectName
      * @param projectId
      * @return
      */
@@ -165,5 +175,26 @@ public class LabacProjectsService extends BaseService<LabacProjects,Integer> {
         map.put("projectId",projectId);
         labacProjectsMapper.selectProjectNameAndDescById(map);
         return map;
+    }
+
+    /**
+     * æ‰¹é‡å¢åŠ 
+     * @param list
+     * @return
+     */
+    public List<Integer> insertBatch(List<LabacProjects> list) {
+        List<Integer> idList = new ArrayList<Integer>();
+        for (LabacProjects labacProjects : list) {
+            if (labacProjects.getProjectId() == null) {
+
+            /*ä¸ºæ¯ä¸€ä¸ªprojectæ·»åŠ id*/
+                Integer id = super.selectId().intValue();
+                labacProjects.setProjectId(id);
+                idList.add(id);
+            }
+        }
+
+        super.insertMore(list);
+        return idList;
     }
 }

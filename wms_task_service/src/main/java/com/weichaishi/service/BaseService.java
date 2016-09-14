@@ -3,15 +3,22 @@ package com.weichaishi.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.weichaishi.dao.BaseMapper;
+import com.weichaishi.model.LabacProjects;
 import com.weichaishi.model.LabacTasks;
 import com.weichaishi.model.ProjectsTasksView;
 import com.weichaishi.result.PageResult;
+import org.apache.ibatis.session.ExecutorType;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.defaults.DefaultSqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+//import tk.mybatis.mapper.common.Mapper;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.SQLException;
 import java.sql.Struct;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -93,14 +100,6 @@ public abstract class BaseService<T,ID extends Serializable> {
 
 
     /**
-     *批量插入
-     * @param list
-     * @return
-     */
-    public Integer insertBatch(List<T> list){
-        return baseMapper.insertList(list);
-    }
-    /**
      修改数据信息
      * @param entity
      * @return
@@ -117,27 +116,6 @@ public abstract class BaseService<T,ID extends Serializable> {
      * @return
      */
     public Integer updateBySelective(T entity){
-//        Method[] methods = entity.getClass().getMethods();
-//        Class<?> aClass = entity.getClass();
-     /*   for(Method method : methods){
-            String name = method.getName();
-            if(name.contains("Update")){
-                if(name.contains("set")){
-                    try {
-                        Object o = entity.getClass().newInstance();
-                        method.invoke(o, new Date());
-                    } catch (IllegalAccessException e) {
-                        e.printStackTrace();
-                    } catch (InvocationTargetException e) {
-                        e.printStackTrace();
-                    } catch (InstantiationException e) {
-                        e.printStackTrace();
-                    }
-                }
-
-            }
-        }*/
-
         return baseMapper.updateByPrimaryKeySelective(entity);
     }
 
@@ -164,24 +142,69 @@ public abstract class BaseService<T,ID extends Serializable> {
      * @param id
      * @return
      */
-    public  T queryOneById(Integer id){
+    public  T queryOneById(ID id){
         return  baseMapper.selectByPrimaryKey(id);
     };
 
+    @Autowired
+    private SqlSessionFactory sqlSessionFactory;
 
+//    protected MAPPER mapper;
 
-
-  /*  private T model;
-
-    public BaseService() {
-        ParameterizedType type = (ParameterizedType)this.getClass().getGenericSuperclass();
-        System.err.println("type==" + type);
-        Type type1 = type.getActualTypeArguments()[0];
-
-        System.out.println("entityClass==" + type.getActualTypeArguments()[0]);
-        System.out.println("getOwnerType==" + type.getOwnerType());
-        System.out.println("getRawType==" + type.getRawType());
-        model = type1.
-    }*/
-
+    public T insertMore(List<T> data) {
+        T back = null;
+        SqlSession batchSqlSession = null;
+        try {
+            batchSqlSession = sqlSessionFactory.openSession(ExecutorType.BATCH, false);
+            int batchCount = 500;//每批commit的个数
+            for (int index = 0; index < data.size(); index++) {
+                T t = data.get(index);
+                back = t;
+                Class<?>[] interfaces = baseMapper.getClass().getInterfaces();
+                Class clazz = null;
+                for (int i = 0; i < interfaces.length; i++) {
+                    if (BaseMapper.class.isAssignableFrom(interfaces[i])) {
+                        clazz = interfaces[i];
+                    }
+                }
+                if (clazz == null) {
+                    throw new Exception("user-defined exception:mapper not implements interfaces com.wcs.wms.dao.mapper.BaseMapper");
+                }
+                BaseMapper baseMapper = (BaseMapper) batchSqlSession.getMapper(clazz);
+                baseMapper.insertSelective(t);
+                if (index != 0 && index % batchCount == 0) {
+                    batchSqlSession.commit();
+                }
+            }
+            batchSqlSession.commit();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (batchSqlSession != null) {
+                batchSqlSession.close();
+            }
+            return back;
+        }
+     }
+    public BigDecimal selectId(){
+        SqlSession sqlSession = null;
+        Map<String, BigDecimal> map = null;
+        try {
+            sqlSession = sqlSessionFactory.openSession();
+            map = sqlSession.selectMap("com.weichaishi.dao.LabacProjectsMapper.selectId", "ID");
+            Collection<BigDecimal> values = map.values();
+            Object[] objects = values.toArray();
+            map = (Map) objects[0];
+            BigDecimal id = map.get("ID");
+            sqlSession.commit();
+            return id;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }finally {
+            if(sqlSession != null){
+                sqlSession.close();
+            }
+        }
+        return null;
+    }
 }

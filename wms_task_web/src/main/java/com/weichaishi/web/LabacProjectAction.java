@@ -1,16 +1,20 @@
 package com.weichaishi.web;
 
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.weichaishi.model.LabacProjects;
 import com.weichaishi.model.ProjectsTasksView;
 import com.weichaishi.result.PageResult;
 import com.weichaishi.service.LabacProjectsService;
 import com.weichaishi.utils.JsonResponseResult;
+import com.weichaishi.utils.Projects;
 import com.weichaishi.utils.SysConstent;
 import org.apache.http.HttpStatus;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -228,7 +232,7 @@ public class LabacProjectAction {
      * @param projectId
      * @return
      */
-    @RequestMapping(value="/map/{projectId}")
+    @RequestMapping(value="/map/{projectId}",method = RequestMethod.GET)
     @ResponseBody
     public Object selectProjectNameAndDescById(@PathVariable("projectId")Integer projectId){
         JsonResponseResult<Map<String, Object>> result = new JsonResponseResult<Map<String, Object>>();
@@ -236,4 +240,56 @@ public class LabacProjectAction {
         result.setData(map);
         return result;
     }
+
+    /**
+     * 批量插入，接受的是对象数组，格式如下：
+     * list[0].projectName=哇哈哈哈&list[0].projectDesc=哈哈哈&list[0].projectOrder=1&list[1].projectName=哇嘿嘿&
+     * list[1].projectDesc=嘿嘿&list[1].projectOrder=1
+     *
+     * eg：list%5B0%5D.projectName=%E5%93%87%E5%93%88%E5%93%88%E5%93%88&list%5B0%5D.projectDesc=%E5%93%88%E5%93%88%E5%93%88&
+     * list%5B1%5D.projectName=%E5%93%87%E5%98%BF%E5%98%BF&list%5B1%5D.projectDesc=%E5%98%BF%E5%98%BF&list%5B0%5D.projectOrder=1&list%5B1%5D.projectOrder=1
+     * @param projects
+     * @return
+     */
+    @RequestMapping(value="/batch",method = RequestMethod.POST)
+    @ResponseBody
+    public Object insertBatch(Projects projects){
+        JsonResponseResult<List<Integer>> result = new JsonResponseResult<List<Integer>>();
+        List<Integer> list = labacProjectsService.insertBatch(projects.getList());
+        result.setData(list);
+        return result;
+    }
+
+    /**
+     * 批量插入--接受Json格式数据；格式如下“：
+     * [
+     * {
+     * "projectName":"ll哈撒尅",
+     * "projectDesc":"ll亚索",
+     * "projectOrder":1
+     * },
+     * {"projectName":"ll螺旋手里剑",
+     * "projectDesc":"ll哪里逃",
+     * "projectOrder":1}
+     * ]
+     *
+     * @param jsonData
+     * @return
+     */
+    @RequestMapping(value="/batch/json",method = RequestMethod.POST)
+    @ResponseBody
+    public Object insertBatchForJson(@RequestBody String jsonData){
+        JsonResponseResult<Object> result = new JsonResponseResult<Object>();
+        ObjectMapper mapper = new ObjectMapper();
+        try {
+            List<LabacProjects> value =(List<LabacProjects>) mapper.readValue(jsonData, new TypeReference<List<LabacProjects>>() {
+            });
+            List<Integer> list = labacProjectsService.insertBatch(value);
+            result.setData(list);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
+    }
+
 }

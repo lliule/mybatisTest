@@ -3,6 +3,7 @@ package com.weichaishi.service;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.weichaishi.dao.LabacTasksMapper;
+import com.weichaishi.model.LabacProjects;
 import com.weichaishi.model.LabacTasks;
 import com.weichaishi.result.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -115,13 +116,12 @@ public class LabacTasksService extends BaseService<LabacTasks,Integer> {
      * @param labacTasksList
      * @return
      */
-    @Override
-    public Integer insertBatch(List<LabacTasks> labacTasksList){
+    public LabacTasks insertBatch(List<LabacTasks> labacTasksList){
         for (LabacTasks labacTasks : labacTasksList){
             labacTasks.setTaskCreateTime(new Date());
             labacTasks.setTaskUpdateTime(labacTasks.getTaskCreateTime());
         }
-        return super.insertBatch(labacTasksList);
+        return super.insertMore(labacTasksList);
     }
 
     /**
