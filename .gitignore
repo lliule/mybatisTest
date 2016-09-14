@@ -5,4 +5,3 @@
 /wms_task_web/target/
 
 /wms_task_web/src/main/resources/log4j.properties
-/wms_task_web/src/main/resources/jdbc.properties
